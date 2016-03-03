@@ -1,0 +1,21 @@
+plot: tst_rast.o raster.o fat.o p1_ship.o p2_ship.o en_ship.o
+	cc68x tst_rast.o raster.o fat.o p1_ship.o p2_ship.o en_ship.o -o plot
+
+tst_rast.o: tst_rast.c raster.h p1_ship.h p2_ship.h en_ship.h
+	cc68x -g -c tst_rast.c
+
+raster.o: raster.c raster.h
+	cc68x -g -c raster.c
+
+fat.o: fat.c fat.h TYPES.h
+	cc68x -g -c fat.c
+
+p1_ship.o: p1_ship.c p1_ship.h TYPES.h
+	cc68x -g -c p1_ship.c
+
+p2_ship.o: p2_ship.c p2_ship.h TYPES.h
+	cc68x -g -c p2_ship.c
+	
+en_ship.o: en_ship.c en_ship.h TYPES.h
+	cc68x -g -c en_ship.c
+
