@@ -9,7 +9,7 @@ clean:
 model: tstModel.o model.o events.o
 	cc68x tstModel.o model.o events.o -o model
 
-tstModel.o: tstModel.c events.h model.h
+tstModel.o: tstModel.c events.h 
 	cc68x -g -c tstModel.c
 
 model.o: model.c model.h 

@@ -1,15 +1,8 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include "types.h"
+#include "globals.h"
 
-#define NUM_PLAYERS 1
-#define NUM_ENEMIES 1
-
-#define PLAYER_DX 8
-#define PLAYER_DY 8
-
-#define EMEMY_DX 8
 
 /** @struct playerShip
  *	@brief This structure is the player's ship
@@ -37,6 +30,9 @@ typedef struct {
 	UINT16 deltaY;
 	
 	UINT8 alive;
+	
+	UINT8 move_requested;
+	UINT8 move_requested_direction;
 	
 } playerShip;
 
@@ -79,9 +75,6 @@ typedef struct {
 struct Model {
 	UINT16 score;
 	
-	UINT8 player_move_requested;
-	char player_move_requested_direction;
-	
 	playerShip players[NUM_PLAYERS];
 	
 	enemyShip enemies[NUM_ENEMIES];
@@ -93,11 +86,11 @@ void init_model(struct Model *modelPtr);
 void set_score(struct Model *modelPtr, UINT16 value);
 UINT16 get_score(struct Model *modelPtr);
 
-void set_player_move_requested(struct Model *modelPtr, UINT8 request);
-UINT8 get_player_move_requested(struct Model *modelPtr);
+void set_player_move_requested(struct Model *modelPtr, UINT16 player, UINT8 request);
+UINT8 get_player_move_requested(struct Model *modelPtr, UINT16 player);
 
-void set_player_move_requested_direction(struct Model *modelPtr, char direction);
-char get_player_move_requested_direction(struct Model *modelPtr);
+void set_player_move_requested_direction(struct Model *modelPtr, UINT16 player, UINT8 direction);
+UINT8 get_player_move_requested_direction(struct Model *modelPtr, UINT16 player);
 
 void set_player_cor(struct Model *modelPtr, UINT16 player, UINT16 x, UINT16 y);
 UINT16 get_player_posX(struct Model *modelPtr, UINT16 player);
@@ -107,8 +100,6 @@ void set_player_deltaX(struct Model *modelPtr, UINT16 player, UINT16 deltaX);
 UINT16 get_player_deltaX(struct Model *modelPtr, UINT16 player);
 void set_player_deltaY(struct Model *modelPtr, UINT16 player, UINT16 deltaY);
 UINT16 get_player_deltaY(struct Model *modelPtr, UINT16 player);
-
-void request_player_pos_change(struct Model *modelPtr, UINT16 player, char direction);
 
 void set_player_alive(struct Model *modelPtr, UINT16 player, UINT8 alive);
 UINT8 get_player_alive(struct Model *modelPtr, UINT16 player);

@@ -14,23 +14,6 @@
  * 
  * The functions in this file:
  *
- * void init_model(struct Model *modelPtr);
- *
- * void set_score(struct Model *modelPtr, UINT16 value);
- * UINT16 get_score(struct Model *modelPtr);
- * 
- * void set_player_cor(struct Model *modelPtr, UINT16 player, UINT16 x, UINT16 y);
- * UINT16 get_player_posX(struct Model *modelPtr, UINT16 player);
- * UINT16 get_player_posY(struct Model *modelPtr, UINT16 player);
- * 
- * void set_player_alive(struct Model *modelPtr, UINT16 player, UINT8 alive);
- * UINT8 get_player_alive(struct Model *modelPtr, UINT16 player);
- * 
- * void set_enemy_cor(struct Model *modelPtr, UINT16 enemy, UINT16 x, UINT16 y);
- * UINT16 get_enemy_posX(struct Model *modelPtr, UINT16 enemy);
- * UINT16 get_enemy_posY(struct Model *modelPtr, UINT16 enemy);
- * 
- * void printModel(struct Model *modelPtr);
  * 
  */
  
@@ -51,11 +34,9 @@
  * @return: none
  * 
  */
-void init_model(struct Model *modelPtr) {
-	int i;
-	
+void init_model(struct Model *modelPtr) {	
 	set_score(modelPtr, 0); 	/* initialize score to 0 */
-	set_player_move_requested(modelPtr, 0);
+	set_player_move_requested(modelPtr, 0, 0);
 	
 	set_player_deltaX(modelPtr, 0, 8);
 	set_player_deltaY(modelPtr, 0, 8);
@@ -63,14 +44,7 @@ void init_model(struct Model *modelPtr) {
 	set_player_cor(modelPtr, 0, 0, 160); 	/* set player 1's position in play area */
 	set_player_alive(modelPtr, 0, 0); 	/* set player 1's alive state to true */
 	
-	if (NUM_PLAYERS == 2) {
-		set_player_cor(modelPtr, 1, 0, 100); 	/* set player 2's position in play area */
-		set_player_alive(modelPtr, 1, 0); 	/* set player 2's alive state to true */
-	}
-	
-	for (i = 0; i < NUM_ENEMIES; i++) { 	/* set each enemies position in play area */
-		set_enemy_cor(modelPtr, i, 500, 200);
-	}
+	set_enemy_cor(modelPtr, 0, 500, 200); 	/* set each enemies position in play area */
 	
 }
 
@@ -88,7 +62,7 @@ void init_model(struct Model *modelPtr) {
  * 
  */
 void set_score(struct Model *modelPtr, UINT16 value) {
-	(*modelPtr).score = value;
+	modelPtr->score = value;
 }
 
 /** get_score: Returns the current value of a given models score.
@@ -101,81 +75,73 @@ void set_score(struct Model *modelPtr, UINT16 value) {
  * 
  */
 UINT16 get_score(struct Model *modelPtr) {
-	return (*modelPtr).score;
+	return modelPtr->score;
 }
 
-void set_player_move_requested(struct Model *modelPtr, UINT8 request) {
-	(*modelPtr).player_move_requested = request;
+void set_player_move_requested(struct Model *modelPtr, UINT16 player, UINT8 request) {
+	modelPtr->players[player].move_requested = request;
 }
 
-UINT8 get_player_move_requested(struct Model *modelPtr) {
-	return (*modelPtr).player_move_requested;
+UINT8 get_player_move_requested(struct Model *modelPtr, UINT16 player) {
+	return modelPtr->players[player].move_requested;
 }
 
-void set_player_move_requested_direction(struct Model *modelPtr, char direction) {
-	(*modelPtr).player_move_requested_direction = direction;
+void set_player_move_requested_direction(struct Model *modelPtr, UINT16 player, UINT8 direction) {
+	modelPtr->players[player].move_requested_direction = direction;
 }
 
-char get_player_move_requested_direction(struct Model *modelPtr) {
-	return (*modelPtr).player_move_requested_direction;
+UINT8 get_player_move_requested_direction(struct Model *modelPtr, UINT16 player) {
+	return modelPtr->players[player].move_requested_direction;
 }
 
 void set_player_cor(struct Model *modelPtr, UINT16 player, UINT16 x, UINT16 y) {
 	modelPtr->players[player].posX = x;
 	modelPtr->players[player].posY = y;
-	
 }
 
 UINT16 get_player_posX(struct Model *modelPtr, UINT16 player) {
-	return (*modelPtr).players[player].posX;
+	return modelPtr->players[player].posX;
 }
 
 UINT16 get_player_posY(struct Model *modelPtr, UINT16 player) {
-	return (*modelPtr).players[player].posY;
+	return modelPtr->players[player].posY;
 }
 
 void set_player_deltaX(struct Model *modelPtr, UINT16 player, UINT16 deltaX) {
-	(*modelPtr).players[player].deltaX = deltaX;
+	modelPtr->players[player].deltaX = deltaX;
 }
 
 UINT16 get_player_deltaX(struct Model *modelPtr, UINT16 player) {
-	return (*modelPtr).players[player].deltaX;
+	return modelPtr->players[player].deltaX;
 }
 
 void set_player_deltaY(struct Model *modelPtr, UINT16 player, UINT16 deltaY) {
-	(*modelPtr).players[player].deltaY = deltaY;
+	modelPtr->players[player].deltaY = deltaY;
 }
 
 UINT16 get_player_deltaY(struct Model *modelPtr, UINT16 player) {
-	return (*modelPtr).players[player].deltaY;
-}
-
-void request_player_pos_change(struct Model *modelPtr, UINT16 player, char direction) {
-	set_player_move_requested(modelPtr, 1);
-	set_player_move_requested_direction(modelPtr, direction);
-	
+	return modelPtr->players[player].deltaY;
 }
 
 void set_player_alive(struct Model *modelPtr, UINT16 player, UINT8 alive) {
-	(*modelPtr).players[player].alive = alive;
+	modelPtr->players[player].alive = alive;
 }
 
 UINT8 get_player_alive(struct Model *modelPtr, UINT16 player) {
-	return (*modelPtr).players[player].alive;
+	return modelPtr->players[player].alive;
 }
 
 void set_enemy_cor(struct Model *modelPtr, UINT16 enemy, UINT16 x, UINT16 y) {
-	(*modelPtr).enemies[enemy].posX = x;
-	(*modelPtr).enemies[enemy].posY = y;
-	
+	modelPtr->enemies[enemy].posX = x;
+	modelPtr->enemies[enemy].posY = y;
 }
 
 UINT16 get_enemy_posX(struct Model *modelPtr, UINT16 enemy) {
-	return (*modelPtr).players[enemy].posX;
+	return modelPtr->players[enemy].posX;
 }
 
 UINT16 get_enemy_posY(struct Model *modelPtr, UINT16 enemy) {
-	return (*modelPtr).players[enemy].posY;
+	return modelPtr->players[enemy].posY;
 }
 
 /*
@@ -189,26 +155,6 @@ void printModel(struct Model *modelPtr) {
 	printf("Player 1 Cor: (%u,%u)\n", get_player_posX(modelPtr, 0), get_player_posY(modelPtr, 0));
 	printf("Player 1 Alive: %d\n", get_player_alive(modelPtr, 0));
 	
-	if (NUM_PLAYERS == 2) {
-		printf("Player 2 Cor: (%u,%u)\n", get_player_posX(modelPtr, 1), get_player_posY(modelPtr, 1));
-		printf("Player 2 Alive: %d\n", get_player_alive(modelPtr, 1));
-		
-	}
-	
 	printf("\n");
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
