@@ -1,21 +1,9 @@
 # COMP2659-Project
 
-## Stage 03 - Model
+## Add everything to Stage05, it contains the modified versions of the previous stages
+
 ### Don
 
-### Moe
 
-- - - -
-
-## Stage 04 - Renderer
-### Don
-
-### Moe
-- Work on some functions 
-
-- - - -
-
-## Stage 05 - Main Game
-### Don
 
 ### Moe
