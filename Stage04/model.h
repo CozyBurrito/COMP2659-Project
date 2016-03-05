@@ -25,6 +25,9 @@ typedef struct {
 	UINT16 posX;
 	UINT16 posY;
 	
+	UINT16 old_posX;
+	UINT16 old_posY;
+	
 	UINT16 deltaX;
 	UINT16 deltaY;
 	
@@ -51,6 +54,9 @@ typedef struct {
 typedef struct {
 	UINT16 posX;
 	UINT16 posY;
+	
+	UINT16 old_posX;
+	UINT16 old_posY;
 	
 	UINT16 deltaX;
 	
@@ -95,6 +101,10 @@ void set_player_cor(struct Model *modelPtr, UINT16 player, UINT16 x, UINT16 y);
 UINT16 get_player_posX(struct Model *modelPtr, UINT16 player);
 UINT16 get_player_posY(struct Model *modelPtr, UINT16 player);
 
+void set_player_old_cor(struct Model *modelPtr, UINT16 player, UINT16 x, UINT16 y);
+UINT16 get_player_old_posX(struct Model *modelPtr, UINT16 player);
+UINT16 get_player_old_posY(struct Model *modelPtr, UINT16 player);
+
 void set_player_deltaX(struct Model *modelPtr, UINT16 player, UINT16 deltaX);
 UINT16 get_player_deltaX(struct Model *modelPtr, UINT16 player);
 void set_player_deltaY(struct Model *modelPtr, UINT16 player, UINT16 deltaY);
@@ -106,6 +116,10 @@ UINT8 get_player_alive(struct Model *modelPtr, UINT16 player);
 void set_enemy_cor(struct Model *modelPtr, UINT16 enemy, UINT16 x, UINT16 y);
 UINT16 get_enemy_posX(struct Model *modelPtr, UINT16 enemy);
 UINT16 get_enemy_posY(struct Model *modelPtr, UINT16 enemy);
+
+void set_enemy_old_cor(struct Model *modelPtr, UINT16 enemy, UINT16 x, UINT16 y);
+UINT16 get_enemy_old_posX(struct Model *modelPtr, UINT16 enemy);
+UINT16 get_enemy_old_posY(struct Model *modelPtr, UINT16 enemy);
 
 void printModel(struct Model *modelPtr);
 	

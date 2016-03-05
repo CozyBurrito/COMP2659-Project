@@ -14,8 +14,8 @@ typedef unsigned long UINT32;
 #define LEFT 'a'
 #define RIGHT 'd'
 
-#define P1_SHIP_WIDTH 64
-#define P1_SHIP_HEIGHT 32
+#define SHIP_WIDTH 64
+#define SHIP_HEIGHT 32
 
 #define NUM_PLAYERS 1
 #define NUM_ENEMIES 1
