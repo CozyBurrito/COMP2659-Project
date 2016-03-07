@@ -46,7 +46,9 @@ int main() {
 			}
 			
 			has_moved = move_player_ship(gamePtr, 0);
+			collision(gamePtr,0,0);
 			move_enemy_ship(gamePtr, 0);
+			collision(gamePtr,0,0);
 			render_model(gamePtr, base, has_moved);
 		}
 		
