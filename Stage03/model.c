@@ -20,7 +20,7 @@
 #include <osbind.h>
 #include <stdlib.h>
 #include <stdio.h>
-
+#include <time.h>
 #include "model.h"
 
 /** init_model: Used to initialize the values of a given model.  
@@ -35,17 +35,22 @@
  * 
  */
 void init_model(struct Model *modelPtr) {	
+
 	set_score(modelPtr, 0); 	/* initialize score to 0 */
 	set_player_move_requested(modelPtr, 0, 0);
 	
 	set_player_deltaX(modelPtr, 0, 8);
 	set_player_deltaY(modelPtr, 0, 8);
 	
-	set_player_cor(modelPtr, 0, 0, 160); 	/* set player 1's position in play area */
+	
+
+	set_player_cor(modelPtr, 0, 0, 160); 	/*set player 1's position in play area */
+	
+
 	set_player_alive(modelPtr, 0, 0); 	/* set player 1's alive state to true */
-	
+
 	set_enemy_cor(modelPtr, 0, 500, 200); 	/* set each enemies position in play area */
-	
+
 }
 
 /** set_score: Used to set the score of a given model.  
@@ -137,11 +142,11 @@ void set_enemy_cor(struct Model *modelPtr, UINT16 enemy, UINT16 x, UINT16 y) {
 }
 
 UINT16 get_enemy_posX(struct Model *modelPtr, UINT16 enemy) {
-	return modelPtr->players[enemy].posX;
+	return modelPtr->enemies[enemy].posX;
 }
 
 UINT16 get_enemy_posY(struct Model *modelPtr, UINT16 enemy) {
-	return modelPtr->players[enemy].posY;
+	return modelPtr->enemies[enemy].posY;
 }
 
 /*
@@ -152,9 +157,15 @@ void generate_enemy_cor(struct Model *modelPtr, UINT16 enemy){
 void printModel(struct Model *modelPtr) {
 	printf("Score: %u\n", get_score(modelPtr));
 	
-	printf("Player 1 Cor: (%u,%u)\n", get_player_posX(modelPtr, 0), get_player_posY(modelPtr, 0));
-	printf("Player 1 Alive: %d\n", get_player_alive(modelPtr, 0));
-	
+	printf("Player 1 Coordinates : (%u,%u)\n", get_player_posX(modelPtr, 0), get_player_posY(modelPtr, 0));
+	printf("Player 1 Offset      : (%u,%u)\n", get_player_posX(modelPtr,0)+64,get_player_posY(modelPtr,0)+32);
+	printf("Player 1 Alive status: %d\n", get_player_alive(modelPtr, 0));
+	printf("Enemy Coordinates    : (%u,%u)\n", get_enemy_posX(modelPtr,0),get_enemy_posY(modelPtr,0));
+	printf("Enemy Offset         : (%u,%u)\n", get_enemy_posX(modelPtr,0)+64,get_enemy_posY(modelPtr,0)+32);
+
+	if(get_player_alive(modelPtr,0)){
+		printf("GAME OVER \n");
+	}
 	printf("\n");
 	
 }
