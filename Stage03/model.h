@@ -2,6 +2,7 @@
 #define MODEL_H
 
 #include "globals.h"
+#include <time.h>
 
 
 /** @struct playerShip
@@ -74,7 +75,7 @@ typedef struct {
  */
 struct Model {
 	UINT16 score;
-	
+
 	playerShip players[NUM_PLAYERS];
 	
 	enemyShip enemies[NUM_ENEMIES];
