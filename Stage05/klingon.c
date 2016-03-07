@@ -17,7 +17,7 @@ int main() {
 	UINT8 ch;
 	UINT8 has_moved = 1;
 	UINT8 sync = 0;
-	UINT32 time;
+	UINT32 timeNow, timeThen;
 	
 	struct Model game;
 	struct Model *gamePtr = &game;
@@ -27,7 +27,8 @@ int main() {
 	init_render(base);
 	render_model(gamePtr, base, has_moved);
 	
-	time = get_time();
+	timeNow = get_time();
+	timeThen = timeNow + 70;
 
 	while(!game_over(gamePtr)) {
 		
@@ -37,10 +38,11 @@ int main() {
 			request_player_move(gamePtr, 0, ch);
 		}
 		
-		if(time != get_time()) {
+		if(timeNow != get_time()) {
 			
-			if(get_time() % 2 == 0) {
+			if(timeNow >= timeThen) {
 				us(gamePtr);
+				timeThen = timeNow + 70;
 			}
 			
 			has_moved = move_player_ship(gamePtr, 0);
@@ -48,8 +50,7 @@ int main() {
 			render_model(gamePtr, base, has_moved);
 		}
 		
-		time = get_time();
-		
+		timeNow = get_time();
 	
 	}
 
