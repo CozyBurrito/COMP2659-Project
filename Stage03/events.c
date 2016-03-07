@@ -98,7 +98,7 @@ void collision(struct Model *modelPtr, UINT16 enemy, UINT16 player){
 
 
 void update_score(struct Model *modelPtr) {
-
+	modelPtr->score+=1;
 }
 
 

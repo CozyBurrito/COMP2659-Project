@@ -90,15 +90,20 @@ void move_enemy_ship(struct Model *modelPtr, UINT16 enemy) {
 
 }
 
-void player_collision(struct Model *modelPtr, UINT16 player) {
-	set_player_alive(modelPtr, player, 1);
+void collision(struct Model *modelPtr, UINT16 enemy, UINT16 player){
+	int playerX = get_player_posX(modelPtr,player);
+	int playerY = get_player_posY(modelPtr, player);
+	int enemyX = get_enemy_posX(modelPtr, enemy);
+	int enemyY = get_enemy_posY(modelPtr, enemy);
+
+	if(((playerX+64 >= enemyX && playerX+64 <= enemyX+64) &&
+	    (playerY+32 >= enemyY && playerY+32 <= enemyY+32)) ||
+	   ((playerX+64 >= enemyX && playerX+64 <= enemyX+64) &&
+	    (playerY >= enemyY && playerY <= enemyY+32))){
+			set_player_alive(modelPtr, player, 1);
+		}
 }
 
-
-/*
-void enemy_collision(struct Model *modelPtr, UINT16 enemy) {
-}
-*/
 
 /*
 void update_score(struct Model *modelPtr) {
