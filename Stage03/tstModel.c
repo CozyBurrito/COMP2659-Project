@@ -33,6 +33,12 @@ int main() {
 		/* Check if there is a clock tick */
 		if(sync) {
 			move_player_ship(gamePtr, 0);	/* Move the ship if a move was requested */
+			collision(gamePtr, 0,0);
+			move_enemy_ship(gamePtr, 0);
+			collision(gamePtr, 0,0);
+			/*
+			update_score(gamePtr);
+			*/
 			printModel(gamePtr); 		/* Print the status of the model */
 			
 			sync = 0;
