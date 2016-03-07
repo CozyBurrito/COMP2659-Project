@@ -39,11 +39,12 @@ int main() {
 		
 		if(time != get_time()) {
 			
-			if(get_time() % 70 == 0) {
+			if(get_time() % 2 == 0) {
 				us(gamePtr);
 			}
 			
 			has_moved = move_player_ship(gamePtr, 0);
+			move_enemy_ship(gamePtr, 0);
 			render_model(gamePtr, base, has_moved);
 		}
 		

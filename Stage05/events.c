@@ -81,7 +81,8 @@ void move_enemy_ship(struct Model *modelPtr, UINT16 enemy) {
 	UINT16 enemy_posX = get_enemy_posX(modelPtr, enemy);
 	
 	if (enemy_posX > 0) {
-		enemy_posX -= 8;
+		enemy_posX -= 4;
+		set_enemy_old_cor(modelPtr, enemy, enemy_posX + 4, 200);
 		set_enemy_cor(modelPtr, enemy, enemy_posX, 200);
 	}
 	else {

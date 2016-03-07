@@ -10,11 +10,11 @@ void init_render(UINT8 *base) {
 
 void render_model(struct Model *modelPtr, UINT8 *base, UINT8 has_moved) {
 	
-	render_ship(modelPtr, base, 0, 0);
-	
 	if (has_moved) {
 		render_ship(modelPtr, base, 1, 0);
 	}
+	
+	render_ship(modelPtr, base, 0, 0);
 	
 	render_score(modelPtr, base);
 	
