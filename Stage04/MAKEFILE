@@ -1,0 +1,35 @@
+all: 
+	make clean 
+	make render
+
+clean:
+	!Rm *.o
+	!Rm render
+
+render: tstRend.o renderer.o model.o p1_ship.o en_ship.o raster.o fat.o empty.o
+	cc68x tstRend.o renderer.o model.o p1_ship.o en_ship.o raster.o fat.o empty.o -o render
+
+tstRend.o: tstRend.c model.h renderer.h globals.h
+	cc68x -g -c tstRend.c
+
+renderer.o: renderer.c renderer.h globals.h
+	cc68x -g -c renderer.c
+	
+model.o: model.c model.h globals.h
+	cc68x -g -c model.c
+	
+p1_ship.o: p1_ship.c p1_ship.h globals.h
+	cc68x -g -c p1_ship.c
+	
+en_ship.o: en_ship.c en_ship.h globals.h
+	cc68x -g -c en_ship.c
+	
+raster.o: raster.c raster.h globals.h
+	cc68x -g -c raster.c
+	
+fat.o: fat.c fat.h globals.h
+	cc68x -g -c fat.c
+	
+empty.o: empty.c empty.h globals.h
+	cc68x -g -c empty.c
+	
