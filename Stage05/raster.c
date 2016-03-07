@@ -92,7 +92,6 @@ void clear_screen() {
 	printf("\033E\033f\n");
 }
 
-
 void plot_bitmap_64_byte(UINT8 *base, int x, int y, const UINT8 *bitmap, unsigned int height) {
 	int i = 0,
 		j = 0,
