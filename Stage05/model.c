@@ -42,11 +42,9 @@ void init_model(struct Model *modelPtr) {
 	set_player_deltaY(modelPtr, 0, 8);
 	
 	set_player_cor(modelPtr, 0, 20, 160); 	/* set player 1's position in play area */
-	set_player_old_cor(modelPtr, 0, 0, 0);
 	set_player_alive(modelPtr, 0, 0); 	/* set player 1's alive state to true */
 	
 	set_enemy_cor(modelPtr, 0, 500, 200); 	/* set each enemies position in play area */
-	set_enemy_old_cor(modelPtr, 0, 600, 0); 
 	
 }
 
@@ -109,19 +107,6 @@ UINT16 get_player_posY(struct Model *modelPtr, UINT16 player) {
 	return modelPtr->players[player].posY;
 }
 
-void set_player_old_cor(struct Model *modelPtr, UINT16 player, UINT16 x, UINT16 y) {
-	modelPtr->players[player].old_posX = x;
-	modelPtr->players[player].old_posY = y;
-}
-
-UINT16 get_player_old_posX(struct Model *modelPtr, UINT16 player) {
-	return modelPtr->players[player].old_posX;
-}
-
-UINT16 get_player_old_posY(struct Model *modelPtr, UINT16 player) {
-	return modelPtr->players[player].old_posY;
-}
-
 void set_player_deltaX(struct Model *modelPtr, UINT16 player, UINT16 deltaX) {
 	modelPtr->players[player].deltaX = deltaX;
 }
@@ -159,22 +144,8 @@ UINT16 get_enemy_posY(struct Model *modelPtr, UINT16 enemy) {
 	return modelPtr->enemies[enemy].posY;
 }
 
-void set_enemy_old_cor(struct Model *modelPtr, UINT16 enemy, UINT16 x, UINT16 y) {
-	modelPtr->enemies[enemy].old_posX = x;
-	modelPtr->enemies[enemy].old_posY = y;
-}
-
-UINT16 get_enemy_old_posX(struct Model *modelPtr, UINT16 enemy) {
-	return modelPtr->enemies[enemy].old_posX;
-}
-
-UINT16 get_enemy_old_posY(struct Model *modelPtr, UINT16 enemy) {
-	return modelPtr->enemies[enemy].old_posY;
-}
-
-
 /*
-void generate_enemy_cor(struct Model *modelPtr, UINT16 enemy){
+void generate_enemy_cor(struct Model *modelPtr, UINT16 enemy) {
 }
 */
 
