@@ -82,11 +82,13 @@ void move_enemy_ship(struct Model *modelPtr, UINT16 enemy) {
 	
 	if (enemy_posX > 0) {
 		enemy_posX -= 4;
-		set_enemy_old_cor(modelPtr, enemy, enemy_posX + 4, 200);
-		set_enemy_cor(modelPtr, enemy, enemy_posX, 200);
+		set_enemy_old_cor(modelPtr, enemy, enemy_posX + 4, get_enemy_posY(modelPtr,enemy));
+		set_enemy_cor(modelPtr, enemy, enemy_posX, get_enemy_posY(modelPtr,enemy));
 	}
 	else {
-		set_enemy_cor(modelPtr, enemy, 580, 200);
+		generate_enemy_cor(modelPtr,enemy);
+
+		/*set_enemy_cor(modelPtr, enemy, 556, get_enemy_posY(modelPtr,enemy));*/
 	}
 }
 
