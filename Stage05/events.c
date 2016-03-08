@@ -86,9 +86,8 @@ void move_enemy_ship(struct Model *modelPtr, UINT16 enemy) {
 		set_enemy_cor(modelPtr, enemy, enemy_posX, 200);
 	}
 	else {
-		set_enemy_cor(modelPtr, enemy, 500, 200);
+		set_enemy_cor(modelPtr, enemy, 580, 200);
 	}
-
 }
 
 void collision(struct Model *modelPtr, UINT16 enemy, UINT16 player){
