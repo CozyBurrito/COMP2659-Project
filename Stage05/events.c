@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 #include "events.h"
-
+#include "model.h"
 
 UINT8 move_player_ship(struct Model *modelPtr, UINT16 player) {
 	UINT8 has_moved = 0;
