@@ -11,7 +11,7 @@ UINT32 get_time();
 void us(struct Model *gamePtr);
 
 int main() {
-	
+	int i = 0;
 	UINT8 *base = Physbase();
 	
 	UINT8 ch;
@@ -46,10 +46,19 @@ int main() {
 			}
 			
 			has_moved = move_player_ship(gamePtr, 0);
-			collision(gamePtr,0,0);
-			move_enemy_ship(gamePtr, 0);
-			collision(gamePtr,0,0);
+			
+			for(i = 0; i < 6; i++)
+				collision(gamePtr,i,0);
+			
+			for(i = 0; i < 6; i++)
+				move_enemy_ship(gamePtr, i);
+			
+			for(i = 0; i < 6; i++)
+				collision(gamePtr,i,0);
+			
 			render_model(gamePtr, base, has_moved);
+			/*printModel(gamePtr); */
+
 		}
 		
 		timeNow = get_time();

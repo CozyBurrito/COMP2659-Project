@@ -1,28 +1,11 @@
-/**
- * Name(s): 
- * Email(s): 
- * Class:
- * Date:
- * Assignment: 
- * Instructor:
- * File(s):
- */
-/**
- * MODEL.C
- * 
- * This file contains the functions that help manage the structures in MODEL.H.
- * 
- * The functions in this file:
- *
- * 
- */
- 
 #include <osbind.h>
 #include <stdlib.h>
 #include <stdio.h>
 
 #include "model.h"
-
+#include "events.h"
+#include "renderer.h"
+#include "globals.h"
 /** init_model: Used to initialize the values of a given model.  
  * 				It takes a pointer to a model and changes it's values 
  * 				to set values, instead of having to call all of the
@@ -35,6 +18,9 @@
  * 
  */
 void init_model(struct Model *modelPtr) {	
+	int i;
+	int enemyY;
+	
 	set_score(modelPtr, 0); 	/* initialize score to 0 */
 	set_player_move_requested(modelPtr, 0, 0);
 	
@@ -44,10 +30,13 @@ void init_model(struct Model *modelPtr) {
 	set_player_cor(modelPtr, 0, 20, 160); 	/* set player 1's position in play area */
 	set_player_old_cor(modelPtr, 0, 0, 0);
 	set_player_alive(modelPtr, 0, 0); 	/* set player 1's alive state to true */
-	
-	set_enemy_cor(modelPtr, 0, 536, 200); 	/* set each enemies position in play area */
-	set_enemy_old_cor(modelPtr, 0, 600, 0); 
-	
+
+	for(i = 0; i < 6; i++){
+		generate_enemy_cor(modelPtr,i);
+
+		/*set_enemy_cor(modelPtr, i, 556, i*52);*/
+		set_enemy_old_cor(modelPtr, i, 0, 0); /*just set to something that isn't null*/
+	}	
 }
 
 /** set_score: Used to set the score of a given model.  
@@ -172,18 +161,43 @@ UINT16 get_enemy_old_posY(struct Model *modelPtr, UINT16 enemy) {
 	return modelPtr->enemies[enemy].old_posY;
 }
 
-
 /*
-void generate_enemy_cor(struct Model *modelPtr, UINT16 enemy){
-}
+make a boolean array so a lane isn't occupied by more than one ship
 */
+void generate_enemy_cor(struct Model *modelPtr, UINT16 enemy){
+	int enemyY = 0;
+	int r = rand() % 7;
+	
+	
+	if(r == 0)
+		enemyY = 0;
+	else if(r == 1)
+		enemyY = 52;
+	else if(r == 2)
+		enemyY = 104;
+	else if(r == 3)
+		enemyY = 156;
+	else if(r == 4)
+		enemyY = 208;
+	else if(r == 5)
+		enemyY = 260;
+	else if(r == 6)
+		enemyY = 312;
+	else
+		enemyY = 364;
+	
+	set_enemy_cor(modelPtr, enemy, 556, enemyY);
+
+	}
+
 
 void printModel(struct Model *modelPtr) {
+	int i = 0;
 	printf("Score: %u\n", get_score(modelPtr));
-	
-	printf("Player 1 Cor: (%u,%u)\n", get_player_posX(modelPtr, 0), get_player_posY(modelPtr, 0));
-	printf("Player 1 Alive: %d\n", get_player_alive(modelPtr, 0));
-	
+	for(i = 0; i < 6; i++){
+		printf("lane for enemy: %i,%i",i,get_enemy_posY(modelPtr,i));
+	}
 	printf("\n");
+	sleep(1);
 	
 }
