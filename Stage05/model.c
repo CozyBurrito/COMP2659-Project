@@ -45,7 +45,7 @@ void init_model(struct Model *modelPtr) {
 	set_player_old_cor(modelPtr, 0, 0, 0);
 	set_player_alive(modelPtr, 0, 0); 	/* set player 1's alive state to true */
 	
-	set_enemy_cor(modelPtr, 0, 500, 200); 	/* set each enemies position in play area */
+	set_enemy_cor(modelPtr, 0, 536, 200); 	/* set each enemies position in play area */
 	set_enemy_old_cor(modelPtr, 0, 600, 0); 
 	
 }

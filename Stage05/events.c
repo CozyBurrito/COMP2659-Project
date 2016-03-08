@@ -29,11 +29,11 @@ UINT8 move_player_ship(struct Model *modelPtr, UINT16 player) {
 		player_deltaX = get_player_deltaX(modelPtr, player);
 		player_deltaY = get_player_deltaY(modelPtr, player);
 		
-		if(direction == UP && player_posY > player_deltaY) {
+		if(direction == UP && player_posY > 0) {
 			player_posY -= player_deltaY;
 			has_moved = 1;
 		}
-		else if(direction == DOWN && player_posY < SCREEN_HEIGHT - 32) {
+		else if(direction == DOWN && player_posY < SCREEN_HEIGHT - 88) {
 			player_posY += player_deltaY;
 			has_moved = 1;
 		}
