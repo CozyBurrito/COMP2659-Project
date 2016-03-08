@@ -97,10 +97,9 @@ void collision(struct Model *modelPtr, UINT16 enemy, UINT16 player){
 	int enemyX = get_enemy_posX(modelPtr, enemy);
 	int enemyY = get_enemy_posY(modelPtr, enemy);
    
-	if(((playerX+64 >= enemyX && playerX <= enemyX+64) &&
-	    (playerY+32 >= enemyY && playerY <= enemyX+32)) ||
-	   ((playerX+64 >= enemyX && playerX <= enemyX+64) &&
-	    (playerY <= enemyY+32 && playerY >= enemyY))){
+	if((playerX+64 >= enemyX && playerX <= enemyX+64) &&
+	    (playerY+32 >= enemyY && playerY <= enemyY+32))
+		{
 			set_player_alive(modelPtr, player, 1);
 		}
 			
