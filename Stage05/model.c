@@ -198,6 +198,5 @@ void printModel(struct Model *modelPtr) {
 		printf("lane for enemy: %i,%i",i,get_enemy_posY(modelPtr,i));
 	}
 	printf("\n");
-	sleep(1);
 	
 }

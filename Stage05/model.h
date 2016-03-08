@@ -121,6 +121,9 @@ void set_enemy_old_cor(struct Model *modelPtr, UINT16 enemy, UINT16 x, UINT16 y)
 UINT16 get_enemy_old_posX(struct Model *modelPtr, UINT16 enemy);
 UINT16 get_enemy_old_posY(struct Model *modelPtr, UINT16 enemy);
 
+void generate_enemy_cor(struct Model *modelPtr, UINT16 enemy);
+
+
 void printModel(struct Model *modelPtr);
 	
 #endif
