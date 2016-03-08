@@ -2,6 +2,7 @@
 #define RASTER_H
 
 #include "fat.h"
+#include "clr_qk.h"
 #include "globals.h"
 
 void plot_pixel(UINT8 *base, int x, int y);

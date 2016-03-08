@@ -1,6 +1,5 @@
 #include <osbind.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 #include "raster.h"
 
@@ -89,7 +88,8 @@ void print_num(UINT8 *base, int x, int y, UINT16 num) {
 }
 
 void clear_screen() {
-	printf("\033E\033f\n");
+	long *base = Physbase();
+	clr_scrn(base);
 }
 
 
