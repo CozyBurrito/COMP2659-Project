@@ -33,7 +33,6 @@ void init_model(struct Model *modelPtr) {
 
 	for(i = 0; i < NUM_ENEMIES; i++){		
 		generate_enemy_cor(modelPtr,i);
-		set_enemy_old_cor(modelPtr, i, 0, 0);
 	}	
 }
 
@@ -180,7 +179,7 @@ void generate_enemy_cor(struct Model *modelPtr, UINT16 enemy){
 			enemyY = 312;
 		
 		if(!enemy_collision(modelPtr, enemyY, enemy)){
-			set_enemy_cor(modelPtr, enemy, 576, enemyY);
+			set_enemy_cor(modelPtr, enemy, 568, enemyY);
 			set_active(modelPtr, enemy, 1);
 		}
 		
