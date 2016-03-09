@@ -14,7 +14,5 @@ void collision(struct Model *modelPtr, UINT16 enemy, UINT16 player);
 
 UINT8 game_over(struct Model *modelPtr);
 
-int enemy_collision(struct Model *modelPtr, int enemyY, UINT16 enemy);
-
 
 #endif

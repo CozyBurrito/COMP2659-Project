@@ -14,9 +14,9 @@ void render_model(struct Model *modelPtr, UINT8 *base, UINT8 has_moved) {
 		render_ship(modelPtr, base, 1, 0);
 	}
 	
-	for(i = 0; i < NUM_ENEMIES; i++){
+	for(i = 0; i < 6; i++)
 		render_ship(modelPtr, base, 0, i);
-	}
+	
 	render_score(modelPtr, base);
 	
 }

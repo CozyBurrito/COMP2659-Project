@@ -18,7 +18,7 @@ int main() {
 	UINT8 has_moved = 1;
 	UINT8 sync = 0;
 	UINT32 timeNow, timeThen;
-
+	
 	struct Model game;
 	struct Model *gamePtr = &game;
 	
@@ -29,7 +29,7 @@ int main() {
 	
 	timeNow = get_time();
 	timeThen = timeNow + 70;
-	
+
 	while(!game_over(gamePtr)) {
 		
 		/* Check if there is kbd input */
@@ -37,7 +37,7 @@ int main() {
 			ch = Cnecin();	
 			request_player_move(gamePtr, 0, ch);
 		}
-
+		
 		if(timeNow != get_time()) {
 			
 			if(timeNow >= timeThen) {
@@ -45,18 +45,16 @@ int main() {
 				timeThen = timeNow + 70;
 			}
 			
-			
 			has_moved = move_player_ship(gamePtr, 0);
-			/*
-			for(i = 0; i < NUM_ENEMIES; i++)
+			
+			for(i = 0; i < 6; i++)
 				collision(gamePtr,i,0);
-			*/
-			for(i = 0; i < NUM_ENEMIES; i++)
+			
+			for(i = 0; i < 6; i++)
 				move_enemy_ship(gamePtr, i);
-			/*
-			for(i = 0; i < NUM_ENEMIES; i++)
+			
+			for(i = 0; i < 6; i++)
 				collision(gamePtr,i,0);
-			*/
 			
 			render_model(gamePtr, base, has_moved);
 			/*printModel(gamePtr); */
@@ -66,7 +64,7 @@ int main() {
 		timeNow = get_time();
 	
 	}
-	
+
 	return 0;
 }
 

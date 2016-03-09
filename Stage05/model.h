@@ -59,7 +59,6 @@ typedef struct {
 	UINT16 old_posY;
 	
 	UINT16 deltaX;
-	UINT16 active;
 	
 } enemyShip;
 
@@ -88,9 +87,6 @@ struct Model {
 };
 
 void init_model(struct Model *modelPtr);
-
-void set_active(struct Model *modelPtr, UINT16 enemy, UINT16 active);
-UINT16 get_active(struct Model *modelPtr, UINT16 enemy);
 
 void set_score(struct Model *modelPtr, UINT16 value);
 UINT16 get_score(struct Model *modelPtr);

@@ -31,9 +31,11 @@ void init_model(struct Model *modelPtr) {
 	set_player_old_cor(modelPtr, 0, 0, 0);
 	set_player_alive(modelPtr, 0, 0); 	/* set player 1's alive state to true */
 
-	for(i = 0; i < NUM_ENEMIES; i++){		
+	for(i = 0; i < 6; i++){
 		generate_enemy_cor(modelPtr,i);
-		set_enemy_old_cor(modelPtr, i, 0, 0);
+
+		/*set_enemy_cor(modelPtr, i, 556, i*52);*/
+		set_enemy_old_cor(modelPtr, i, 0, 0); /*just set to something that isn't null*/
 	}	
 }
 
@@ -159,47 +161,40 @@ UINT16 get_enemy_old_posY(struct Model *modelPtr, UINT16 enemy) {
 	return modelPtr->enemies[enemy].old_posY;
 }
 
+/*
+make a boolean array so a lane isn't occupied by more than one ship
+*/
 void generate_enemy_cor(struct Model *modelPtr, UINT16 enemy){
-	UINT16 enemyY;
-	UINT16 y;
-	y = (rand() % NUM_ENEMIES);
-			
-		if(y == 0)
-			enemyY = 0;
-		else if(y == 1)
-			enemyY = 52;
-		else if(y == 2)
-			enemyY = 104;
-		else if(y == 3)
-			enemyY = 156;
-		else if(y == 4)
-			enemyY = 208;
-		else if(y == 5)
-			enemyY = 260;
-		else if(y == 6)
-			enemyY = 312;
-		
-		if(!enemy_collision(modelPtr, enemyY, enemy)){
-			set_enemy_cor(modelPtr, enemy, 556, enemyY);
-			set_active(modelPtr, enemy, 1);
-		}
-		
-}	
+	int enemyY = 0;
+	int r = rand() % 7;
+	
+	
+	if(r == 0)
+		enemyY = 0;
+	else if(r == 1)
+		enemyY = 52;
+	else if(r == 2)
+		enemyY = 104;
+	else if(r == 3)
+		enemyY = 156;
+	else if(r == 4)
+		enemyY = 208;
+	else if(r == 5)
+		enemyY = 260;
+	else if(r == 6)
+		enemyY = 312;
+	else
+		enemyY = 364;
+	
+	set_enemy_cor(modelPtr, enemy, 556, enemyY);
 
-void set_active(struct Model *modelPtr, UINT16 enemy, UINT16 active){
-	modelPtr->enemies[enemy].active = active;
-}
-
-
-UINT16 get_active(struct Model *modelPtr, UINT16 enemy){
-	return modelPtr->enemies[enemy].active;
-}
+	}
 
 
 void printModel(struct Model *modelPtr) {
 	int i = 0;
 	printf("Score: %u\n", get_score(modelPtr));
-	for(i = 0; i < NUM_ENEMIES; i++){
+	for(i = 0; i < 6; i++){
 		printf("lane for enemy: %i,%i",i,get_enemy_posY(modelPtr,i));
 	}
 	printf("\n");
