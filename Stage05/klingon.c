@@ -47,19 +47,19 @@ int main() {
 			
 			
 			has_moved = move_player_ship(gamePtr, 0);
-			/*
+			
 			for(i = 0; i < NUM_ENEMIES; i++)
 				collision(gamePtr,i,0);
-			*/
+			
 			for(i = 0; i < NUM_ENEMIES; i++)
 				move_enemy_ship(gamePtr, i);
-			/*
+			
 			for(i = 0; i < NUM_ENEMIES; i++)
 				collision(gamePtr,i,0);
-			*/
+			
 			
 			render_model(gamePtr, base, has_moved);
-			/*printModel(gamePtr); */
+
 
 		}
 		

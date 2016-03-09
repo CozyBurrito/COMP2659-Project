@@ -180,7 +180,7 @@ void generate_enemy_cor(struct Model *modelPtr, UINT16 enemy){
 			enemyY = 312;
 		
 		if(!enemy_collision(modelPtr, enemyY, enemy)){
-			set_enemy_cor(modelPtr, enemy, 556, enemyY);
+			set_enemy_cor(modelPtr, enemy, 576, enemyY);
 			set_active(modelPtr, enemy, 1);
 		}
 		
