@@ -69,7 +69,6 @@ void request_player_move(struct Model *modelPtr, UINT16 player, UINT8 direction)
 		{
 			is_valid_char = 1;
 		}
-	
 	if(is_valid_char && !get_player_alive(modelPtr, player)) {
 		set_player_move_requested(modelPtr, player, 1);
 		set_player_move_requested_direction(modelPtr, player, direction);
@@ -84,7 +83,7 @@ void move_enemy_ship(struct Model *modelPtr, UINT16 enemy) {
 			enemy_posX -= 4;
 			set_enemy_cor(modelPtr, enemy, enemy_posX, get_enemy_posY(modelPtr,enemy));
 			set_enemy_old_cor(modelPtr, enemy, enemy_posX + 4, get_enemy_posY(modelPtr,enemy));
-		}
+			}
 	else {
 		set_active(modelPtr, enemy, 0);
 		generate_enemy_cor(modelPtr,enemy);
