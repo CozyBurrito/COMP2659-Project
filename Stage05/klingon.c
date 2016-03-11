@@ -8,7 +8,6 @@
 #include "globals.h"
 
 UINT32 get_time();
-void us(struct Model *gamePtr);
 
 int main() {
 	int i = 0;
@@ -36,15 +35,15 @@ int main() {
 	while(!game_over(gamePtr)) {
 		
 		/* Check if there is kbd input */
-		if(Cconis()) {
-			ch = Cnecin();	
+		if(kbd_is_waiting()) {
+			ch = kbd_read_char();	
 			request_player_move(gamePtr, 0, ch);
 		}
 
 		if(timeNow != get_time()) {
 			
 			if(timeNow >= timeThen) {
-				us(gamePtr);
+				update_score(gamePtr, 1);
 				timeThen = timeNow + 70;
 			}
 			
@@ -68,10 +67,6 @@ int main() {
 	}
 	
 	return 0;
-}
-
-void us(struct Model *gamePtr) {
-	gamePtr->score += 1;
 }
 
 UINT32 get_time() {

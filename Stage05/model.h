@@ -93,6 +93,7 @@ void init_model(struct Model *modelPtr);
 
 void set_active(struct Model *modelPtr, UINT16 enemy, UINT16 active);
 UINT16 get_active(struct Model *modelPtr, UINT16 enemy);
+void update_score(struct Model *modelPtr, UINT16 value);
 
 void set_score(struct Model *modelPtr, UINT16 value);
 UINT16 get_score(struct Model *modelPtr);
