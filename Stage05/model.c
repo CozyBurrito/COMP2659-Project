@@ -110,6 +110,10 @@ UINT16 get_score(struct Model *modelPtr) {
 	return modelPtr->score;
 }
 
+void update_score(struct Model *modelPtr, UINT16 value) {
+	modelPtr->score += value;
+}
+
 void set_player_move_requested(struct Model *modelPtr, UINT16 player, UINT8 request) {
 	modelPtr->players[player].move_requested = request;
 }

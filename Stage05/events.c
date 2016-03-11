@@ -112,6 +112,7 @@ int enemy_collision(struct Model *modelPtr, int enemyY, UINT16 enemy){
 	int thisEnemyY = enemyY;
 	int otherEnemyX;
 	int otherEnemyY;
+<<<<<<< HEAD
 	for(i = 0; i < NUM_ENEMIES; i++){
 		otherEnemyX = get_enemy_old_posX(modelPtr, i);
 		otherEnemyY = get_enemy_posY(modelPtr, i);
@@ -121,6 +122,16 @@ int enemy_collision(struct Model *modelPtr, int enemyY, UINT16 enemy){
 				/*if((thisEnemyX <= otherEnemyX+68)){*/
 					collision = 1;
 				/*}*/
+=======
+	for(i = 0; i <= NUM_ENEMIES; i++){
+		otherEnemyX = get_enemy_posX(modelPtr, i);
+		otherEnemyY = get_enemy_posY(modelPtr, i);
+		if(get_active(modelPtr,i)){
+			if(otherEnemyY == thisEnemyY){
+				if((thisEnemyX <= otherEnemyX+68)){
+					collision = 1;
+				}
+>>>>>>> master
 			}		
 		}
 	}	
@@ -132,3 +143,10 @@ UINT8 game_over(struct Model *modelPtr) {
 }
 
 
+long kbd_is_waiting() {
+	return Cconis();
+}
+
+long kbd_read_char() {
+	return Cnecin();
+}
