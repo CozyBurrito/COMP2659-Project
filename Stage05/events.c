@@ -87,7 +87,6 @@ void move_enemy_ship(struct Model *modelPtr, UINT16 enemy) {
 	else {
 		set_active(modelPtr, enemy, 0);
 		generate_enemy_cor(modelPtr,enemy);
-
 	}
 	
 }
@@ -97,14 +96,13 @@ void collision(struct Model *modelPtr, UINT16 enemy, UINT16 player){
 	int playerY = get_player_posY(modelPtr, player);
 	int enemyX = get_enemy_posX(modelPtr, enemy);
 	int enemyY = get_enemy_posY(modelPtr, enemy);
-   
+	
 	if((playerX+64 >= enemyX && playerX <= enemyX+64) &&
 	    (playerY+32 >= enemyY && playerY <= enemyY+32))
 		{
 			set_player_alive(modelPtr, player, 1);
 		}
-			
-
+	
 }
 
 int enemy_collision(struct Model *modelPtr, int enemyY, UINT16 enemy){
@@ -115,14 +113,16 @@ int enemy_collision(struct Model *modelPtr, int enemyY, UINT16 enemy){
 	int otherEnemyX;
 	int otherEnemyY;
 	for(i = 0; i < NUM_ENEMIES; i++){
-		otherEnemyX = get_enemy_posX(modelPtr, i);
+		otherEnemyX = get_enemy_old_posX(modelPtr, i);
 		otherEnemyY = get_enemy_posY(modelPtr, i);
 		if(get_active(modelPtr,i)){
-			if((thisEnemyX >= otherEnemyX-68) && (thisEnemyX <= otherEnemyX+68)){
+			if(thisEnemyX <= otherEnemyX+80 && thisEnemyX >= otherEnemyX)
+			/*if(otherEnemyX+68 >= thisEnemyX)*/{
+				/*if((thisEnemyX <= otherEnemyX+68)){*/
 					collision = 1;
+				/*}*/
 			}		
 		}
-	
 	}	
 	return collision;
 }
