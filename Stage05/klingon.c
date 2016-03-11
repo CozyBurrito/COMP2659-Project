@@ -21,12 +21,8 @@ int main() {
 
 	struct Model game;
 	struct Model *gamePtr = &game;
-<<<<<<< HEAD
+
 	for(i = 0; i < NUM_ENEMIES; i++){
-=======
-	
-	for(i = 0; i <= NUM_ENEMIES; i++){
->>>>>>> master
 		set_active(gamePtr,i,0);
 	}
 	init_model(gamePtr);
