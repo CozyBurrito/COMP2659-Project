@@ -8,6 +8,7 @@
 #include "globals.h"
 
 UINT32 get_time();
+void disable_cursor();
 
 int main() {
 	int i = 0;
@@ -20,11 +21,12 @@ int main() {
 
 	struct Model game;
 	struct Model *gamePtr = &game;
+	
 	for(i = 0; i <= NUM_ENEMIES; i++){
 		set_active(gamePtr,i,0);
 	}
 	init_model(gamePtr);
-	
+	disable_cursor();
 	init_render(base);
 	render_model(gamePtr, base, has_moved);
 	
@@ -67,6 +69,12 @@ int main() {
 	}
 	
 	return 0;
+}
+
+void disable_cursor()
+{
+	printf("\033f");
+	fflush(stdout);
 }
 
 UINT32 get_time() {
