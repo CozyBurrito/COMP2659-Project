@@ -87,6 +87,8 @@ struct Model {
 
 };
 
+void randomize_enemy_cor(struct Model *modelPtr, UINT16 enemy);
+
 void init_model(struct Model *modelPtr);
 
 void set_active(struct Model *modelPtr, UINT16 enemy, UINT16 active);

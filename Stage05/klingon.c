@@ -1,7 +1,7 @@
 #include <osbind.h>
 #include <stdlib.h>
 #include <stdio.h>
-
+#include <time.h>
 #include "model.h"
 #include "events.h"
 #include "renderer.h"
@@ -21,7 +21,9 @@ int main() {
 
 	struct Model game;
 	struct Model *gamePtr = &game;
-	
+	for(i = 0; i <= NUM_ENEMIES; i++){
+		set_active(gamePtr,i,0);
+	}
 	init_model(gamePtr);
 	
 	init_render(base);
@@ -29,7 +31,8 @@ int main() {
 	
 	timeNow = get_time();
 	timeThen = timeNow + 70;
-	
+	srand(time(0));
+
 	while(!game_over(gamePtr)) {
 		
 		/* Check if there is kbd input */
@@ -48,7 +51,7 @@ int main() {
 			
 			has_moved = move_player_ship(gamePtr, 0);
 			
-			for(i = 0; i < NUM_ENEMIES; i++)
+			for(i = 0; i <= NUM_ENEMIES; i++)
 				move_enemy_ship(gamePtr, i);
 			
 			for(i = 0; i < NUM_ENEMIES; i++)

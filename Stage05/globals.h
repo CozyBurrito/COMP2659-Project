@@ -18,7 +18,7 @@ typedef unsigned long UINT32;
 #define SHIP_HEIGHT 32
 
 #define NUM_PLAYERS 1
-#define NUM_ENEMIES 8
+#define NUM_ENEMIES 8 
 
 #define PLAYER_DX 8
 #define PLAYER_DY 8
