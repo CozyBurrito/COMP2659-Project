@@ -31,11 +31,55 @@ void init_model(struct Model *modelPtr) {
 	set_player_old_cor(modelPtr, 0, 0, 0);
 	set_player_alive(modelPtr, 0, 0); 	/* set player 1's alive state to true */
 
-	for(i = 0; i < NUM_ENEMIES; i++){		
-		generate_enemy_cor(modelPtr,i);
+	
+	for(i = 0; i <= NUM_ENEMIES; i++){
+		randomize_enemy_cor(modelPtr, i);
 	}	
 }
 
+
+/*
+TODO: encapsulate the if else blocks in functions. Leave as is right now for
+		ease of understanding
+*/
+void randomize_enemy_cor(struct Model *modelPtr, UINT16 enemy){
+	UINT16 enemyY;
+	UINT16 enemyX;
+	UINT16 y;
+	UINT16 x;
+	y = (rand() % NUM_ENEMIES);
+			
+		if(y == 0)
+			enemyY = 0;
+		else if(y == 1)
+			enemyY = 52;
+		else if(y == 2)
+			enemyY = 104;
+		else if(y == 3)
+			enemyY = 156;
+		else if(y == 4)
+			enemyY = 208;
+		else if(y == 5)
+			enemyY = 260;
+		else if(y == 6)
+			enemyY = 312;
+		
+		if(!enemy_collision(modelPtr, enemyY, enemy)){
+			x = (rand() % NUM_ENEMIES);
+			if(x == 0 || x == 4)
+				enemyX = 568;
+			else if(x == 1 || x == 5)
+				enemyX = 440;
+			else if(x == 2 || x == 6)
+				enemyX = 312;
+			else if(x == 3) 
+				enemyX = 248;
+			
+			set_enemy_cor(modelPtr, enemy, enemyX, enemyY);
+			set_active(modelPtr, enemy, 1);
+		}
+		
+}
 /** set_score: Used to set the score of a given model.  
  * 			   It takes a pointer to a model and changes it's score 
  * 			   value to the given value.
