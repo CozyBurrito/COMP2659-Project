@@ -11,7 +11,7 @@ void print_char(UINT8 *base, int x, int y, char ch);
 void print_string(UINT8 *base, int x, int y, char *str);
 void print_num(UINT8 *base, int x, int y, UINT16 num);
 void print_clr_num(UINT8 *base, int x, int y);
-void clear_screen();
+void clear_screen(long *base);
 void plot_bitmap_64_byte(UINT8 *base, int x, int y, const UINT8 *bitmap, unsigned int height);
 
 #endif

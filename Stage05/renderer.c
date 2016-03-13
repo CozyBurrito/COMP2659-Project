@@ -3,22 +3,23 @@
 #include "renderer.h"
 
 void init_render(UINT8 *base) {
-	clear_screen();
-	render_line(base);
-	
 }
 
 void render_model(struct Model *modelPtr, UINT8 *base, UINT8 has_moved) {
 	int i = 0;
-	if (has_moved) {
-		render_ship(modelPtr, base, 1, 0);
-	}
 	
+	long *base2 = (long *)base;
+	clear_screen(base2);
+	render_line(base);
+
+	render_ship(modelPtr, base, 1, 0);
+
 	for(i = 0; i <= NUM_ENEMIES; i++){
 		if(get_active(modelPtr,i)){
 			render_ship(modelPtr, base, 0, i);
 		}
 	}
+	
 	render_score(modelPtr, base);
 	
 }
@@ -26,18 +27,18 @@ void render_model(struct Model *modelPtr, UINT8 *base, UINT8 has_moved) {
 void render_ship(struct Model *modelPtr, UINT8 *base, UINT8 ship, UINT16 ship_num) {
 	UINT16 ship_posX;
 	UINT16 ship_posY;
-	UINT16 ship_old_posX;
-	UINT16 ship_old_posY;
+	/*UINT16 ship_old_posX;
+	UINT16 ship_old_posY;*/
 	
 	if(ship) {
 		ship_posX = get_player_posX(modelPtr, ship_num);
 		ship_posY = get_player_posY(modelPtr, ship_num);
 	
-		ship_old_posX = get_player_old_posX(modelPtr, ship_num);
+		/*ship_old_posX = get_player_old_posX(modelPtr, ship_num);
 		ship_old_posY = get_player_old_posY(modelPtr, ship_num);
 		
 
-		plot_bitmap_64_byte(base, ship_old_posX, ship_old_posY, empty, SHIP_HEIGHT);
+		plot_bitmap_64_byte(base, ship_old_posX, ship_old_posY, empty, SHIP_HEIGHT);*/
 		plot_bitmap_64_byte(base, ship_posX, ship_posY, p1_ship, SHIP_HEIGHT);
 
 		
@@ -45,12 +46,12 @@ void render_ship(struct Model *modelPtr, UINT8 *base, UINT8 ship, UINT16 ship_nu
 	else {
 		ship_posX = get_enemy_posX(modelPtr, ship_num);
 		ship_posY = get_enemy_posY(modelPtr, ship_num);
-	
+	/*
 		ship_old_posX = get_enemy_old_posX(modelPtr, ship_num);
 		ship_old_posY = get_enemy_old_posY(modelPtr, ship_num);
 		
 
-		plot_bitmap_64_byte(base, ship_old_posX, ship_old_posY, empty, SHIP_HEIGHT);
+		plot_bitmap_64_byte(base, ship_old_posX, ship_old_posY, empty, SHIP_HEIGHT);*/
 		plot_bitmap_64_byte(base, ship_posX, ship_posY, en_ship, SHIP_HEIGHT);
 
 	}
