@@ -11,8 +11,6 @@ UINT8 move_player_ship(struct Model *modelPtr, UINT16 player) {
 	
 	UINT16 player_posX;
 	UINT16 player_posY;
-	UINT16 player_old_posX;
-	UINT16 player_old_posY;
 	
 	UINT16 player_deltaX;
 	UINT16 player_deltaY;
@@ -23,8 +21,6 @@ UINT8 move_player_ship(struct Model *modelPtr, UINT16 player) {
 		
 		player_posX = get_player_posX(modelPtr, player);
 		player_posY = get_player_posY(modelPtr, player);
-		player_old_posX = player_posX;
-		player_old_posY = player_posY;
 		
 		player_deltaX = get_player_deltaX(modelPtr, player);
 		player_deltaY = get_player_deltaY(modelPtr, player);
@@ -48,7 +44,6 @@ UINT8 move_player_ship(struct Model *modelPtr, UINT16 player) {
 
 		
 		if (has_moved) {
-			set_player_old_cor(modelPtr, player, player_old_posX, player_old_posY);
 			set_player_cor(modelPtr, player, player_posX, player_posY);
 		}
 		
@@ -77,16 +72,18 @@ void request_player_move(struct Model *modelPtr, UINT16 player, UINT8 direction)
 }
 
 void move_enemy_ship(struct Model *modelPtr, UINT16 enemy) {	
-
-	UINT16 enemy_posX = get_enemy_posX(modelPtr, enemy);
-	if (enemy_posX > 0) {
-			enemy_posX -= 8;
-			set_enemy_cor(modelPtr, enemy, enemy_posX, get_enemy_posY(modelPtr,enemy));
-			set_enemy_old_cor(modelPtr, enemy, enemy_posX + 8, get_enemy_posY(modelPtr,enemy));
-			}
+	UINT16 enemy_posX;
+	UINT16 enemy_deltaX;
+	
+	enemy_posX = get_enemy_posX(modelPtr, enemy);
+	enemy_deltaX = get_enemy_deltaX(modelPtr, enemy);
+	
+	if (enemy_posX <= 568) {
+		enemy_posX -= enemy_deltaX;
+		set_enemy_cor(modelPtr, enemy, enemy_posX, get_enemy_posY(modelPtr,enemy));
+	}
 	else {
-		set_active(modelPtr, enemy, 0);
-		generate_enemy_cor(modelPtr,enemy);
+		generate_enemy(modelPtr, enemy);
 	}
 	
 }
@@ -102,30 +99,31 @@ void collision(struct Model *modelPtr, UINT16 enemy, UINT16 player){
 		{
 			set_player_alive(modelPtr, player, 1);
 		}
-	
+		
 }
 
-int enemy_collision(struct Model *modelPtr, int enemyY, UINT16 enemy){
+/*
+int enemy_collision(struct Model *modelPtr, int thisEnemyY, UINT16 enemy){
 	int collision = 0;
 	int i = 0;
-	int thisEnemyX = get_enemy_posX(modelPtr, enemy);
-	int thisEnemyY = enemyY;
-	int otherEnemyX;
-	int otherEnemyY;
-	for(i = 0; i < NUM_ENEMIES; i++){
-		otherEnemyX = get_enemy_old_posX(modelPtr, i);
+	
+	UINT16 thisEnemyX = get_enemy_posX(modelPtr, enemy);
+	
+	UINT16 otherEnemyX;
+	UINT16 otherEnemyY;
+	
+	for(i = 0; i < NUM_ENEMIES && get_active(modelPtr,i) && !collision; i++) {
+		otherEnemyX = get_enemy_posX(modelPtr, i);
 		otherEnemyY = get_enemy_posY(modelPtr, i);
-		if(get_active(modelPtr,i)){
-			if(thisEnemyX <= otherEnemyX+80 && thisEnemyX >= otherEnemyX)
-			/*if(otherEnemyX+68 >= thisEnemyX)*/{
-				/*if((thisEnemyX <= otherEnemyX+68)){*/
-					collision = 1;
-				/*}*/
-			}		
+	
+		if(thisEnemyX <= otherEnemyX+80 && thisEnemyX >= otherEnemyX) {
+			collision = 1;
 		}
-	}	
+	}
+
 	return collision;
-}
+}*/
+
 
 UINT8 game_over(struct Model *modelPtr) {
 	return get_player_alive(modelPtr, 0);

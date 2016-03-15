@@ -100,7 +100,7 @@ void plot_bitmap_64_byte(UINT8 *base, int x, int y, const UINT8 *bitmap, unsigne
 	if (x >= 0 && x < SCREEN_WIDTH && y >= 0 && y < SCREEN_HEIGHT) {
 		for (i = 0; i < height; i++) {
 			for(k = 0; k < 8; k++) {
-				*(base + (y + i) * 80 + ((x >> 3) + k)) ^= bitmap[j++];
+				*(base + (y + i) * 80 + ((x >> 3) + k)) |= bitmap[j++];
 			}
 		}
 		
