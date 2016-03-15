@@ -22,6 +22,7 @@ void init_model(struct Model *modelPtr) {
 	int enemyY;
 	
 	set_score(modelPtr, 0); 	/* initialize score to 0 */
+	
 	set_player_move_requested(modelPtr, 0, 0);
 	
 	set_player_deltaX(modelPtr, 0, 8);
@@ -31,8 +32,8 @@ void init_model(struct Model *modelPtr) {
 	set_player_old_cor(modelPtr, 0, 0, 0);
 	set_player_alive(modelPtr, 0, 0); 	/* set player 1's alive state to true */
 
-	
-	for(i = 0; i <= NUM_ENEMIES; i++){
+	for(i = 0; i < NUM_ENEMIES; i++){
+		set_active(modelPtr,i,0);
 		randomize_enemy_cor(modelPtr, i);
 	}	
 }

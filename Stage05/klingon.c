@@ -16,12 +16,14 @@ void disable_cursor();
 
 int main() {
 	int i = 0;
+	
 	UINT8 *base = Physbase();
 	UINT8 *base2 = buffer;
 	
 	UINT8 ch;
 	UINT8 has_moved = 1;
 	UINT8 switchBase = 0;
+	
 	UINT32 timeNow, timeThen;
 
 	struct Model game;
@@ -29,10 +31,6 @@ int main() {
 	
 	base2 += 256 - ((long)base2 & (long)0xFF);
 
-	
-	for(i = 0; i < NUM_ENEMIES; i++){
-		set_active(gamePtr,i,0);
-	}
 	init_model(gamePtr);
 	
 	disable_cursor();
@@ -42,8 +40,9 @@ int main() {
 	
 	timeNow = get_time();
 	timeThen = timeNow + 70;
+	
 	srand(time(0));
-
+	
 	while(!game_over(gamePtr)) {
 		
 		/* Check if there is kbd input */
@@ -52,44 +51,47 @@ int main() {
 			request_player_move(gamePtr, 0, ch);
 		}
 
+		/* If clock ticked */
 		if(timeNow != get_time()) {
 			
+			/* Check if a second has passed */
 			if(timeNow >= timeThen) {
 				update_score(gamePtr, 1);
 				timeThen = timeNow + 70;
 			}
 			
-			
+			/* Move player ship */
 			has_moved = move_player_ship(gamePtr, 0);
 			
+			/* Move enemy ships and check collisions with player ship */
 			for(i = 0; i < NUM_ENEMIES; i++) {
 				move_enemy_ship(gamePtr, i);
 				collision(gamePtr,i,0);
 			}	
 			
 			
+			/* Render the model with double buffering */
 			if(switchBase) {
-				Setscreen(-1, base2, -1);
-				Vsync();
 				render_model(gamePtr, base, has_moved);
-				
+				Setscreen(-1, base, -1);
 			}
 			else {
-				Vsync();
 				render_model(gamePtr, base2, has_moved);
+				Setscreen(-1, base2, -1);
 			}
 			
-			
+			Vsync();
 			switchBase = !switchBase;
-			Setscreen(-1, base, -1);
 			
 		}
-		
-		
 		
 		timeNow = get_time();
 	
 	}
+	
+	render_model(gamePtr, base, has_moved);
+	Setscreen(-1, base, -1);
+	Vsync();
 	
 	return 0;
 }
