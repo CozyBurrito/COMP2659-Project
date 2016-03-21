@@ -5,14 +5,14 @@ all:
 
 clean:
 	!Rm *.o
-	!Rm render
+	!Rm klingon
 
 rmObj:
 	!Rm *.o
 	
 	
-klingon: klingon.o renderer.o model.o events.o p1_ship.o en_ship.o raster.o fat.o empty.o clr_qk.o
-	cc68x klingon.o renderer.o model.o events.o p1_ship.o en_ship.o raster.o fat.o empty.o clr_qk.o -o klingon
+klingon: klingon.o renderer.o model.o events.o p1_ship.o en_ship.o raster.o fat.o empty.o notes.o clr_qk.o 
+	cc68x klingon.o renderer.o model.o events.o p1_ship.o en_ship.o raster.o fat.o empty.o notes.o clr_qk.o -o klingon
 
 klingon.o: klingon.c model.h renderer.h events.h globals.h 
 	cc68x -g -c klingon.c
@@ -40,7 +40,9 @@ fat.o: fat.c fat.h globals.h
 	
 empty.o: empty.c empty.h globals.h
 	cc68x -g -c empty.c
+
+notes.o: notes.c notes.h globals.h
+	cc68x -g -c notes.c
 	
 clr_qk.o: clr_qk.s clr_qk.h
 	gen -L2 clr_qk.s
-	

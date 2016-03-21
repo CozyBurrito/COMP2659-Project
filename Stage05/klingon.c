@@ -8,6 +8,7 @@
 #include "events.h"
 #include "renderer.h"
 #include "globals.h"
+#include "notes.h"
 
 UINT8 buffer[35256];
 
@@ -16,7 +17,8 @@ void disable_cursor();
 
 int main() {
 	int i = 0;
-	
+	int j = 0;
+	int musicCounter = 0;
 	UINT8 *base = Physbase();
 	UINT8 *base2 = buffer;
 	
@@ -29,6 +31,8 @@ int main() {
 	struct Model game;
 	struct Model *gamePtr = &game;
 	
+	long old_ssp;
+	
 	base2 += 256 - ((long)base2 & (long)0xFF);
 
 	init_model(gamePtr);
@@ -38,12 +42,27 @@ int main() {
 	disable_cursor();
 	Setscreen(-1, base, -1);
 	
+	musicTime = get_time();
 	timeNow = get_time();
 	timeThen = timeNow + 70;
+	
+	start_sound(old_ssp);
 	
 	srand(time(0));
 	
 	while(!game_over(gamePtr)) {
+		
+		if(musicCounter < timeArray[j])
+			musicCounter++;
+		if(musicCounter == timeArray[j]){
+			j++;
+			musicCounter = 0;
+			if(j > 31)
+				j = 0;
+		}
+		old_ssp = Super(0);
+		set_tone(0, noteArray[j]);
+		Super(old_ssp);
 		
 		/* Check if there is kbd input */
 		if(kbd_is_waiting()) {
@@ -89,6 +108,10 @@ int main() {
 		timeNow = get_time();
 	
 	}
+	
+	old_ssp = Super(0);
+	stop_sound();
+	Super(old_ssp);
 	
 	render_model(gamePtr, base, has_moved);
 	Setscreen(-1, base, -1);
