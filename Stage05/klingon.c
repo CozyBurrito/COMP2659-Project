@@ -8,7 +8,7 @@
 #include "events.h"
 #include "renderer.h"
 #include "globals.h"
-#include "notes.h"
+#include "music.h"
 
 UINT8 buffer[35256];
 
@@ -17,7 +17,7 @@ void disable_cursor();
 
 int main() {
 	int i = 0;
-	int j = 0;
+	int j = 1;
 	int musicCounter = 0;
 	UINT8 *base = Physbase();
 	UINT8 *base2 = buffer;
@@ -26,12 +26,10 @@ int main() {
 	UINT8 has_moved = 1;
 	UINT8 switchBase = 0;
 	
-	UINT32 timeNow, timeThen;
+	UINT32 timeNow, timeThen, prevCall;
 
 	struct Model game;
 	struct Model *gamePtr = &game;
-	
-	long old_ssp;
 	
 	base2 += 256 - ((long)base2 & (long)0xFF);
 
@@ -42,28 +40,19 @@ int main() {
 	disable_cursor();
 	Setscreen(-1, base, -1);
 	
-	musicTime = get_time();
 	timeNow = get_time();
-	timeThen = timeNow + 70;
+	timeThen = timeNow + DELAY;
 	
-	start_sound(old_ssp);
-	
+	start_sound();
+	prevCall = timeNow;
 	srand(time(0));
 	
 	while(!game_over(gamePtr)) {
-		
-		if(musicCounter < timeArray[j])
-			musicCounter++;
-		if(musicCounter == timeArray[j]){
-			j++;
-			musicCounter = 0;
-			if(j > 31)
-				j = 0;
+	
+		if(update_music(get_time() - prevCall)){
+			prevCall = get_time();		
 		}
-		old_ssp = Super(0);
-		set_tone(0, noteArray[j]);
-		Super(old_ssp);
-		
+			
 		/* Check if there is kbd input */
 		if(kbd_is_waiting()) {
 			ch = kbd_read_char();	
@@ -72,11 +61,12 @@ int main() {
 
 		/* If clock ticked */
 		if(timeNow != get_time()) {
+
 			
 			/* Check if a second has passed */
 			if(timeNow >= timeThen) {
 				update_score(gamePtr, 1);
-				timeThen = timeNow + 70;
+				timeThen = timeNow + DELAY;
 			}
 			
 			/* Move player ship */
@@ -109,10 +99,8 @@ int main() {
 	
 	}
 	
-	old_ssp = Super(0);
 	stop_sound();
-	Super(old_ssp);
-	
+
 	render_model(gamePtr, base, has_moved);
 	Setscreen(-1, base, -1);
 	Vsync();

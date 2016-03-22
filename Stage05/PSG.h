@@ -1,3 +1,5 @@
+#ifndef PSG_H
+#define PSG_H
 #include "globals.h"
 
 #define C_1 0x0D5D
@@ -108,13 +110,10 @@
 #define B_7 0x001C
 #define B_8 0x000E
 
-extern const UINT16 noteArray[];
-extern const UINT16 timeArray[];
-
-void start_sound(long old_ssp);	
 void write_psg(int reg, UINT8 val);
 void set_tone(int channel, int tuning);
 void set_volume(int channel, int volume);
 void enable_channel(int channel, int tone_on, int noise_on);
 void stop_sound();
 
+#endif

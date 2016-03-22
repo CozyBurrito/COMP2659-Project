@@ -25,5 +25,6 @@ typedef unsigned long UINT32;
 
 #define EMEMY_DX 8
 
+#define DELAY 70
 
 #endif
