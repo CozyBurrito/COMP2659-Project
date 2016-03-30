@@ -9,6 +9,8 @@
 #include "renderer.h"
 #include "globals.h"
 #include "music.h"
+#include "explode.h"
+#include "laser.h"
 
 UINT8 buffer[35256];
 
@@ -71,6 +73,7 @@ int main() {
 			
 			/* Move player ship */
 			has_moved = move_player_ship(gamePtr, 0);
+
 			
 			/* Move enemy ships and check collisions with player ship */
 			for(i = 0; i < NUM_ENEMIES; i++) {
@@ -100,7 +103,8 @@ int main() {
 	}
 	
 	stop_sound();
-
+	explosion();
+	
 	render_model(gamePtr, base, has_moved);
 	Setscreen(-1, base, -1);
 	Vsync();

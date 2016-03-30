@@ -4,6 +4,7 @@
 
 #include "events.h"
 #include "model.h"
+#include "laser.h"
 
 UINT8 move_player_ship(struct Model *modelPtr, UINT16 player) {
 	UINT8 has_moved = 0;
@@ -45,6 +46,7 @@ UINT8 move_player_ship(struct Model *modelPtr, UINT16 player) {
 		
 		if (has_moved) {
 			set_player_cor(modelPtr, player, player_posX, player_posY);
+			/*play laser sound here*/
 		}
 		
 		set_player_move_requested(modelPtr, 0, 0);
