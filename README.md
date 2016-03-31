@@ -1,12 +1,13 @@
 # COMP2659-Project
 
-## Add everything to Stage05, it contains the modified versions of the previous stages
+## Work on Stage08 folder
 
-## Figure out how to make the enemy ships  more sparse and not act in a group
 ## Add documentation
+## Move bitmaps to one file and audio to one file
 
 ### Don
-- Add method to update score in model, and modify call in `klingon.c`
+- Stage 8 - Bitmaps for splash screen
 
 ### Moe
-- Make function to generate random coordinates for enemy ships
+- Stage 8 - `UINT16 *get_video_base();` & `void set_video_base(UINT16 *);`
+          - Set up files for splash screen
