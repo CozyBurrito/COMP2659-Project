@@ -9,8 +9,7 @@
 #include "renderer.h"
 #include "globals.h"
 #include "music.h"
-#include "explode.h"
-#include "laser.h"
+#include "effects.h"
 
 UINT8 buffer[35256];
 
@@ -73,15 +72,17 @@ int main() {
 			
 			/* Move player ship */
 			has_moved = move_player_ship(gamePtr, 0);
+			if(has_moved){
+				thruster();
+			}
 
-			
 			/* Move enemy ships and check collisions with player ship */
 			for(i = 0; i < NUM_ENEMIES; i++) {
 				move_enemy_ship(gamePtr, i);
 				collision(gamePtr,i,0);
 			}	
 			
-			
+
 			/* Render the model with double buffering */
 			if(switchBase) {
 				render_model(gamePtr, base, has_moved);
@@ -91,13 +92,13 @@ int main() {
 				render_model(gamePtr, base2, has_moved);
 				Setscreen(-1, base2, -1);
 			}
-			
+
 			Vsync();
 			switchBase = !switchBase;
 			
 		}
 		
-		
+		stop_thruster();		
 		timeNow = get_time();
 	
 	}

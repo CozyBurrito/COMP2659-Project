@@ -10,8 +10,8 @@ clean:
 rmObj:
 	!Rm *.o
 	
-klingon: klingon.o renderer.o model.o events.o p1_ship.o en_ship.o raster.o fat.o empty.o PSG.o music.o explode.o laser.o clr_qk.o 
-	cc68x klingon.o renderer.o model.o events.o p1_ship.o en_ship.o raster.o fat.o empty.o PSG.o music.o explode.o laser.o clr_qk.o -o klingon
+klingon: klingon.o renderer.o model.o events.o p1_ship.o en_ship.o raster.o fat.o empty.o PSG.o music.o effects.o clr_qk.o 
+	cc68x klingon.o renderer.o model.o events.o p1_ship.o en_ship.o raster.o fat.o empty.o PSG.o music.o effects.o clr_qk.o -o klingon
 
 klingon.o: klingon.c model.h renderer.h events.h globals.h 
 	cc68x -g -c klingon.c
@@ -46,11 +46,8 @@ PSG.o: PSG.c PSG.h globals.h
 music.o: music.c music.h globals.h
 	cc68x -g -c music.c
 
-explode.o: explode.c explode.h 
-	cc68x -g -c explode.c
-
-laser.o: laser.c laser.h
-	cc68x -g -c laser.c
+effects.o: effects.c effects.h
+	cc68x -g -c effects.c
 	
 clr_qk.o: clr_qk.s clr_qk.h
 	gen -L2 clr_qk.s

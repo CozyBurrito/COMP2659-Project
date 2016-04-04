@@ -7,6 +7,7 @@
 
 ### Don
 - Stage 8 - Bitmaps for splash screen
+		  - Finish the movement sound 
 
 ### Moe
 - Stage 8 - `UINT16 *get_video_base();` & `void set_video_base(UINT16 *);`
