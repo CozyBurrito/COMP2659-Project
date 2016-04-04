@@ -1,7 +1,7 @@
 #ifndef RASTER_H
 #define RASTER_H
 
-#include "fat.h"
+#include "bitmaps.h"
 #include "clr_qk.h"
 #include "globals.h"
 

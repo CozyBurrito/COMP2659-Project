@@ -3,9 +3,7 @@
 
 #include "raster.h"
 #include "model.h"
-#include "p1_ship.h"
-#include "en_ship.h"
-#include "empty.h"
+#include "bitmaps.h"
 #include "globals.h"
 
 

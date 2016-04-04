@@ -10,8 +10,8 @@ clean:
 rmObj:
 	!Rm *.o
 	
-klingon: klingon.o renderer.o model.o events.o p1_ship.o en_ship.o raster.o fat.o empty.o PSG.o music.o effects.o clr_qk.o 
-	cc68x klingon.o renderer.o model.o events.o p1_ship.o en_ship.o raster.o fat.o empty.o PSG.o music.o effects.o clr_qk.o -o klingon
+klingon: klingon.o renderer.o model.o events.o raster.o PSG.o music.o effects.o bitmaps.o clr_qk.o 
+	cc68x klingon.o renderer.o model.o events.o raster.o PSG.o music.o effects.o bitmaps.o clr_qk.o -o klingon
 
 klingon.o: klingon.c model.h renderer.h events.h globals.h 
 	cc68x -g -c klingon.c
@@ -24,22 +24,10 @@ model.o: model.c model.h globals.h
 	
 events.o: events.c events.h globals.h
 	cc68x -g -c events.c
-	
-p1_ship.o: p1_ship.c p1_ship.h globals.h
-	cc68x -g -c p1_ship.c
-	
-en_ship.o: en_ship.c en_ship.h globals.h
-	cc68x -g -c en_ship.c
-	
+		
 raster.o: raster.c raster.h globals.h
 	cc68x -g -c raster.c
-	
-fat.o: fat.c fat.h globals.h
-	cc68x -g -c fat.c
-	
-empty.o: empty.c empty.h globals.h
-	cc68x -g -c empty.c
-
+			
 PSG.o: PSG.c PSG.h globals.h
 	cc68x -g -c PSG.c
 
@@ -48,6 +36,9 @@ music.o: music.c music.h globals.h
 
 effects.o: effects.c effects.h
 	cc68x -g -c effects.c
+
+bitmaps.o: bitmaps.c bitmaps.h globals.h
+	cc68x -g -c bitmaps.c 
 	
 clr_qk.o: clr_qk.s clr_qk.h
 	gen -L2 clr_qk.s
