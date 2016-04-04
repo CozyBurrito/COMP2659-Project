@@ -1,4 +1,5 @@
 #include "music.h"
+
 static int j = 0;
 
 UINT16 noteArray[] = {C_5,B_4,C_5,G_4,F_4,

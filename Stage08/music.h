@@ -1,5 +1,6 @@
 #ifndef MUSIC_H
 #define MUSIC_H
+
 #include "PSG.h"
 #include "globals.h"
 
