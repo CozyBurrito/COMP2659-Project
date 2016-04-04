@@ -132,3 +132,6 @@ UINT32 get_time() {
 	return time;
 }
 
+UINT8 get_video_base(){
+	
+}
