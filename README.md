@@ -6,7 +6,7 @@
 
 ### Don
 - Stage 8 - Bitmaps for splash screen
+          - Splash Screen
 
 ### Moe
-- Stage 8 - Set up files for splash screen
 - Stage 9b
