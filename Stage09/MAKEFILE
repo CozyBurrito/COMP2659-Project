@@ -1,0 +1,47 @@
+all: 
+	make clean 
+	make klingon
+	make rmObj
+
+clean:
+	!Rm *.o
+	!Rm klingon
+
+rmObj:
+	!Rm *.o
+	
+klingon: klingon.o renderer.o model.o events.o raster.o PSG.o music.o effects.o bitmaps.o clr_qk.o sys.o
+	cc68x klingon.o renderer.o model.o events.o raster.o PSG.o music.o effects.o bitmaps.o clr_qk.o sys.o -o klingon
+
+klingon.o: klingon.c model.h renderer.h events.h globals.h 
+	cc68x -g -c klingon.c
+
+renderer.o: renderer.c renderer.h globals.h
+	cc68x -g -c renderer.c
+	
+model.o: model.c model.h globals.h
+	cc68x -g -c model.c
+	
+events.o: events.c events.h globals.h
+	cc68x -g -c events.c
+		
+raster.o: raster.c raster.h globals.h
+	cc68x -g -c raster.c
+			
+PSG.o: PSG.c PSG.h globals.h
+	cc68x -g -c PSG.c
+
+music.o: music.c music.h globals.h
+	cc68x -g -c music.c
+
+effects.o: effects.c effects.h
+	cc68x -g -c effects.c
+
+bitmaps.o: bitmaps.c bitmaps.h globals.h
+	cc68x -g -c bitmaps.c 
+	
+clr_qk.o: clr_qk.s clr_qk.h
+	gen -L2 clr_qk.s
+	
+sys.o: sys.s sys.h
+	gen -L2 sys.s

@@ -1,14 +1,12 @@
 # COMP2659-Project
 
-## Work on Stage08 folder
+## Work on Stage09 folder
 
 ## Add documentation
-## Move bitmaps to one file and audio to one file
 
 ### Don
 - Stage 8 - Bitmaps for splash screen
-		  - Finish the movement sound 
 
 ### Moe
-- Stage 8 - `UINT16 *get_video_base();` & `void set_video_base(UINT16 *);`
-          - Set up files for splash screen
+- Stage 8 - Set up files for splash screen
+- Stage 9b
