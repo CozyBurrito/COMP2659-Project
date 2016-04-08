@@ -4,15 +4,7 @@
 #include <time.h>
 #include <linea.h>
 
-#include "model.h"
-#include "events.h"
-#include "renderer.h"
-#include "globals.h"
-#include "music.h"
-#include "effects.h"
-#include "sys.h"
-
-#define VBL 28
+#include "klingon.h"
 
 UINT8 buffer[35256];
 
@@ -25,18 +17,15 @@ int enemy_ticks = 0;
 int render_request = 1;
 UINT8 has_moved = 1; 
 
-typedef void (*Vector)();
-Vector install_vector(int num, Vector vector);
-
-int main() {
+void play_klingon() {
 	long old_ssp; /*REMOVE*/
 	Vector orig_vector;
 	
-	UINT8 *base = (UINT8 *)get_video_base();
-	UINT8 *base2 = buffer;
-	
 	UINT8 ch;
 	UINT8 switchBase = 0;
+    
+    UINT8 *base = (UINT8 *)get_video_base();
+	UINT8 *base2 = buffer;
 
 	base2 = (UINT8*)((UINT32)base2 + (256 - ((UINT32)base2) & 255));
 
@@ -86,8 +75,7 @@ int main() {
 	
 	render_model(gamePtr, base, has_moved);
 	set_video_base((UINT16*)base);
-
-	return 0;
+    
 }
 
 Vector install_vector(int num, Vector vector) {

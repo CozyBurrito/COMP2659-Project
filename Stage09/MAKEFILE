@@ -10,34 +10,37 @@ clean:
 rmObj:
 	!Rm *.o
 	
-klingon: klingon.o renderer.o model.o events.o raster.o PSG.o music.o effects.o bitmaps.o clr_qk.o sys.o
-	cc68x klingon.o renderer.o model.o events.o raster.o PSG.o music.o effects.o bitmaps.o clr_qk.o sys.o -o klingon
+klingon: main.o klingon.o renderer.o model.o events.o raster.o PSG.o music.o effects.o bitmaps.o clr_qk.o sys.o 
+	cc68x main.o klingon.o renderer.o model.o events.o raster.o PSG.o music.o effects.o bitmaps.o clr_qk.o sys.o -o klingon
 
-klingon.o: klingon.c model.h renderer.h events.h globals.h 
+main.o: main.c
+	cc68x -g -c main.c
+    
+klingon.o: klingon.c klingon.h
 	cc68x -g -c klingon.c
 
-renderer.o: renderer.c renderer.h globals.h
+renderer.o: renderer.c renderer.h 
 	cc68x -g -c renderer.c
 	
-model.o: model.c model.h globals.h
+model.o: model.c model.h 
 	cc68x -g -c model.c
 	
-events.o: events.c events.h globals.h
+events.o: events.c events.h 
 	cc68x -g -c events.c
 		
-raster.o: raster.c raster.h globals.h
+raster.o: raster.c raster.h 
 	cc68x -g -c raster.c
 			
-PSG.o: PSG.c PSG.h globals.h
+PSG.o: PSG.c PSG.h 
 	cc68x -g -c PSG.c
 
-music.o: music.c music.h globals.h
+music.o: music.c music.h 
 	cc68x -g -c music.c
 
 effects.o: effects.c effects.h
 	cc68x -g -c effects.c
 
-bitmaps.o: bitmaps.c bitmaps.h globals.h
+bitmaps.o: bitmaps.c bitmaps.h 
 	cc68x -g -c bitmaps.c 
 	
 clr_qk.o: clr_qk.s clr_qk.h
