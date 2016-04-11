@@ -7,6 +7,7 @@ extern const UINT8 empty[];
 extern const UINT8 en_ship[];
 extern const UINT8 p1_ship[];
 extern const UINT8 fat[];
+extern const UINT8 splash[];
 
 #define CHAR_BEL    7
 #define CHAR_TAB    9
