@@ -800,6 +800,10 @@ extern const UINT8 empty[];
 extern const UINT8 en_ship[];
 extern const UINT8 p1_ship[];
 extern const UINT8 fat[];
+extern const UINT8 splash[];
+extern const UINT8 rocket_left[];
+extern const UINT8 rocket_right[];
+extern const UINT8 rocket_empty[];
 # 4 "./raster.h" 2
 # 1 "./clr_qk.h" 1
 
