@@ -3,9 +3,6 @@
 #include <stdio.h>
 #include <time.h>
 #include <linea.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include "bitmaps.h"
 
 #include "klingon.h"
 
@@ -24,26 +21,11 @@ void plot_bitmap_64_byte(UINT8 *base, int x, int y, const UINT8 *bitmap, unsigne
    }
    
 void splash_screen(){
-		Vector orig_vector;
-		
 	    UINT8 *base = (UINT8 *)get_video_base();
 		
 		orig_vector = install_vector(VBL, vbl_isr);
 		
 		plot_bitmap_64_byte(base, 0, 0, splash, 400);
 }
-
-
-int main() {
-
-    /*play_klingon();*/
-	splash_screen();
-	
-	return 0;
-}
-
-
-
-
 
 
