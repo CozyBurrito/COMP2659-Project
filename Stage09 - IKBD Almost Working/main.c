@@ -58,12 +58,13 @@ int main() {
 	int selection = 0;
 	UINT8 *base = (UINT8 *)get_video_base();
 	
-	
-	
+	install_vectors();
+
+	/*
 	splash_screen(base);
 	plot_bitmap_32(base, 50, 127, rocket_right, 32);		
 	
-    install_vectors();
+    
     
 	while (!((c == 'd') && (selection%2 == 1))){
 		c = kbd_read_char();
@@ -82,6 +83,13 @@ int main() {
 			play_klingon();
 			splash_screen(base);
 			plot_bitmap_32(base, 50, 127, rocket_right, 32);
+		}
+	}*/
+	
+	while(c != 0x1B) { /* while not esc key */
+		if (kbd_is_waiting()) {
+			c = kbd_read_char();
+			printf("%c\n",c);
 		}
 	}
     

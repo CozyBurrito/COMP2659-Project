@@ -23,8 +23,9 @@ Vector orig_vector_ikbd;
 unsigned char *IKBD_RDR = 0xFFFFFC02;
 char *ascii_tbl = 0xFFFE829C;
 
-char IKBD_buffer = 0;
-char ret;
+char IKBD_buffer[256];
+unsigned char head = 0; /* indexes into buffer array */
+unsigned char tail = 0;
 unsigned char key;
 
 void play_klingon() {
@@ -57,12 +58,9 @@ void play_klingon() {
 			score_ticks = 0;
 		}
 		
+		has_moved = move_player_ship(gamePtr, 0);
 		if(has_moved) {
-			has_moved = move_player_ship(gamePtr, 0);
-			if(has_moved) {
-				thruster();
-			}
-			has_moved = 0;
+			thruster();
 		}
 		
 		for(i = 0; i < NUM_ENEMIES && enemy_ticks >= 3; i++) {
@@ -125,23 +123,32 @@ void do_VBL_ISR() {
 }
 
 void do_IKBD_ISR() {
+	/* Turn off MIDI */
+	/* Check if IKBD is asserting IRQ */
+	/* Mask all interrupts */
+	
     key = *IKBD_RDR;
     
-    if((key & 0x80) == 0x00) {    /* If it's a make code, save it */
-        IKBD_buffer = *(ascii_tbl + key);
+    if(!(key & 0x80)) {    /* If it's a make code, save it */
+		IKBD_buffer[tail] = *(ascii_tbl + key);
+		tail++;
     }
     
+	/* Unmask all interrupts */
+	
 }
 
 long kbd_is_waiting() {
-	return IKBD_buffer != 0;
+	return head != tail;
 }
 
 char kbd_read_char() {
-    while(IKBD_buffer == 0);
+    char ret;
     
-    ret = IKBD_buffer;
-    IKBD_buffer = 0;
+	/*while(head == tail);*/
+
+    ret = IKBD_buffer[head];
+	head++;
     
     return ret;
 }
