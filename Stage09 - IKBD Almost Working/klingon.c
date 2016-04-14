@@ -23,10 +23,11 @@ Vector orig_vector_ikbd;
 unsigned char *IKBD_RDR = 0xFFFFFC02;
 char *ascii_tbl = 0xFFFE829C;
 
-char IKBD_buffer[256];
+unsigned char IKBD_buffer[256];
 unsigned char head = 0; /* indexes into buffer array */
 unsigned char tail = 0;
 unsigned char key;
+int fill = 256;
 
 void play_klingon() {
 	int i;
@@ -126,29 +127,35 @@ void do_IKBD_ISR() {
 	/* Turn off MIDI */
 	/* Check if IKBD is asserting IRQ */
 	/* Mask all interrupts */
+	int orig_ipl = set_ipl(7);
 	
     key = *IKBD_RDR;
     
-    if(!(key & 0x80)) {    /* If it's a make code, save it */
-		IKBD_buffer[tail] = *(ascii_tbl + key);
+    if((!(key & 0x80)) && (fill > 0)) {    /* If it's a make code, save it */
+		IKBD_buffer[tail] = *IKBD_RDR;
 		tail++;
+		fill--;
     }
     
+	set_ipl(orig_ipl);
 	/* Unmask all interrupts */
 	
 }
 
 long kbd_is_waiting() {
-	return head != tail;
+	return fill < 256;
 }
 
 char kbd_read_char() {
-    char ret;
+    char ret = 0;
     
-	/*while(head == tail);*/
-
-    ret = IKBD_buffer[head];
-	head++;
+	while(fill == 256);
+	
+	if(fill < 256){
+		ret = *(ascii_tbl + IKBD_buffer[head]);
+		head++;
+		fill++;
+	}
     
     return ret;
 }

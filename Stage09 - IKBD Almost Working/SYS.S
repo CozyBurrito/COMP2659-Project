@@ -2,6 +2,7 @@
 	xdef	_set_video_base
 	xdef	_vbl_isr
 	xdef	_ikbd_isr
+	xdef	_set_ipl
 	
 	xref	_do_VBL_ISR
 	xref	_do_IKBD_ISR
@@ -80,10 +81,22 @@ _ikbd_isr:
 	rte
 	
 	
+_set_ipl: 
+	move.w	sr,d0
+	move.w	d0,-(sp) 
 	
+	lsr.w	#8,d0 
+	and.w	#$0007,d0 
 	
+	andi.w	#$F8FF,(sp)
+	move.w	d1,-(sp)
+	move.w	8(sp),d1 
+	lsl.w	#8,d1
+	and.w	#$0700,d1
+	or.w	d1,2(sp) 
+	move.w	(sp)+,d1
 	
-	
-	
+	rte
+
 	
 old_ssp:	ds.l	1
