@@ -1,3 +1,10 @@
+/**
+Name: Don Hagen, Mohammad Hameed
+Course: COMP 2659
+Due Date: 15/04/2016
+Instructor: ppospisil
+*/
+
 #include <osbind.h>
 #include "music.h"
 
@@ -18,7 +25,10 @@ UINT16 timeArray[] = {54,54,56,56,56,
 					  54,54,56,56,56,
 					  50,50,50,60,60,50,50
 					  };
-					  
+
+/* 
+Starts the music by playing the first note
+*/
 void start_sound(){
 	long old_ssp = Super(0);
 	
@@ -29,6 +39,9 @@ void start_sound(){
 	Super(old_ssp);
 }
 
+/* 
+updates the music to the next note which is determined by the time 
+*/
 UINT8 update_music(UINT32 time_elapsed){
 	UINT8 updated = 0;
 	

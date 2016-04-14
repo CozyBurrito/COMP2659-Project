@@ -1,3 +1,9 @@
+/**
+Name: Don Hagen, Mohammad Hameed
+Course: COMP 2659
+Due Date: 15/04/2016
+Instructor: ppospisil
+*/
 #include <osbind.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -6,6 +12,9 @@
 #include "model.h"
 #include "effects.h"
 
+/* 
+moves a players ship in the requested direction if there is a request to move the ship
+*/
 UINT8 move_player_ship(struct Model *modelPtr, UINT16 player) {
 	UINT8 has_moved = 0;
 	UINT8 direction;
@@ -17,7 +26,7 @@ UINT8 move_player_ship(struct Model *modelPtr, UINT16 player) {
 	UINT16 player_deltaY;
 	
 	
-	if (get_player_move_requested(modelPtr, player)) {
+	if (get_player_move_requested(modelPtr, player)) {  /* Check if a move was requested */
 		direction = get_player_move_requested_direction(modelPtr, 0);
 		
 		player_posX = get_player_posX(modelPtr, player);
@@ -26,7 +35,7 @@ UINT8 move_player_ship(struct Model *modelPtr, UINT16 player) {
 		player_deltaX = get_player_deltaX(modelPtr, player);
 		player_deltaY = get_player_deltaY(modelPtr, player);
 		
-		if(direction == UP && player_posY > 0) {
+		if(direction == UP && player_posY > 0) {    /* move the players ship*/
 			player_posY -= player_deltaY;
 			has_moved = 1;
 		}
@@ -44,7 +53,7 @@ UINT8 move_player_ship(struct Model *modelPtr, UINT16 player) {
 		}
 
 		
-		if (has_moved) {
+		if (has_moved) {    /* if it actaully moved in a valid direction, then give the player the new coordinates */
 			set_player_cor(modelPtr, player, player_posX, player_posY);
 		}
 		
@@ -55,6 +64,9 @@ UINT8 move_player_ship(struct Model *modelPtr, UINT16 player) {
 	return has_moved;
 }
 
+/* 
+set the request to true if a valid direction is given
+*/
 void request_player_move(struct Model *modelPtr, UINT16 player, UINT8 direction) {
 	UINT8 is_valid_char = 0;
 	
@@ -65,13 +77,17 @@ void request_player_move(struct Model *modelPtr, UINT16 player, UINT8 direction)
 		{
 			is_valid_char = 1;
 		}
-	if(is_valid_char && !get_player_alive(modelPtr, player)) {
+	if(is_valid_char && !get_player_alive(modelPtr, player)) { /* if it's a valid char and the player is alive request the move */
 		set_player_move_requested(modelPtr, player, 1);
 		set_player_move_requested_direction(modelPtr, player, direction);
 	}
 	
 }
 
+/* 
+given an enemy,
+move it's ship
+*/
 void move_enemy_ship(struct Model *modelPtr, UINT16 enemy) {	
 	UINT16 enemy_posX;
 	UINT16 enemy_deltaX;
@@ -79,16 +95,19 @@ void move_enemy_ship(struct Model *modelPtr, UINT16 enemy) {
 	enemy_posX = get_enemy_posX(modelPtr, enemy);
 	enemy_deltaX = get_enemy_deltaX(modelPtr, enemy);
 	
-	if (enemy_posX <= 568) {
+	if (enemy_posX <= 568) {    /* if it's not on the edge of the screen then move it */
 		enemy_posX -= enemy_deltaX;
 		set_enemy_cor(modelPtr, enemy, enemy_posX, get_enemy_posY(modelPtr,enemy));
 	}
-	else {
+	else { /* otherwise generate a new starting position */
 		generate_enemy(modelPtr, enemy);
 	}
 	
 }
 
+/* 
+check if the player collieded with a given enemy
+*/
 void collision(struct Model *modelPtr, UINT16 enemy, UINT16 player){
 	int playerX = get_player_posX(modelPtr,player);
 	int playerY = get_player_posY(modelPtr, player);
@@ -125,7 +144,7 @@ int enemy_collision(struct Model *modelPtr, int thisEnemyY, UINT16 enemy){
 	return collision;
 }*/
 
-
+/* check if the game is over */
 UINT8 game_over(struct Model *modelPtr) {
 	return get_player_alive(modelPtr, 0);
 }

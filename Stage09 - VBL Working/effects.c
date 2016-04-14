@@ -1,12 +1,25 @@
+/**
+Name: Don Hagen, Mohammad Hameed
+Course: COMP 2659
+Due Date: 15/04/2016
+Instructor: ppospisil
+*/
+
 #include <osbind.h>
 #include "PSG.h"
 
+/* 
+Starts the thruster sound
+*/
 void thruster() {
 	long old_ssp = Super(0);
 	write_psg(7,0x36);
 	Super(old_ssp);
 }
 
+/* 
+Stops the thruster sound
+*/
 void stop_thruster()
 {
 	long old_ssp = Super(0);
@@ -14,6 +27,9 @@ void stop_thruster()
 	Super(old_ssp);
 }
 
+/* 
+plays an explosion sound
+*/
 void explosion()
 {
 	long old_ssp = Super(0);

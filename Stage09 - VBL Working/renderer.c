@@ -1,3 +1,9 @@
+/**
+Name: Don Hagen, Mohammad Hameed
+Course: COMP 2659
+Due Date: 15/04/2016
+Instructor: ppospisil
+*/
 #include <osbind.h>
 
 #include "renderer.h"
@@ -5,6 +11,10 @@
 void init_render(UINT8 *base) {
 }
 
+/*
+Given a pointer the model, 
+renders all the ships, score, and clears the screen
+*/
 void render_model(struct Model *modelPtr, UINT8 *base, UINT8 has_moved) {
 	int i = 0;
 	
@@ -23,6 +33,10 @@ void render_model(struct Model *modelPtr, UINT8 *base, UINT8 has_moved) {
 	
 }
 
+/* 
+gievn a ship and the model, 
+renders the ship to the screen
+*/
 void render_ship(struct Model *modelPtr, UINT8 *base, UINT8 ship, UINT16 ship_num) {
 	UINT16 ship_posX;
 	UINT16 ship_posY;
@@ -45,10 +59,17 @@ void render_ship(struct Model *modelPtr, UINT8 *base, UINT8 ship, UINT16 ship_nu
 
 }
 
+/* 
+renders a single horizontal line
+*/
 void render_line(UINT8 *base) {
 	print_line(base,0,344,640,344);
 }
 
+/* 
+given a pointer to the model,
+renders the score to the screen
+*/
 void render_score(struct Model *modelPtr, UINT8 *base) {
 	UINT16 score = get_score(modelPtr);
 	

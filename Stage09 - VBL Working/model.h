@@ -1,3 +1,9 @@
+/**
+Name: Don Hagen, Mohammad Hameed
+Course: COMP 2659
+Due Date: 15/04/2016
+Instructor: ppospisil
+*/
 #ifndef MODEL_H
 #define MODEL_H
 
@@ -20,6 +26,12 @@
  * 	
  *  @var playerShip::alive 
  *  Member 'alive' is an integer value represented by 0 = alive, 1 = dead
+ * 	
+ *  @var playerShip::move_requested 
+ *  Member 'move_requested' is a char value the represents if a move was requested
+ * 	
+ *  @var playerShip::move_requested_direction 
+ *  Member 'move_requested_direction' is char value that represents the direction the move is requested
  */
 typedef struct {
 	UINT16 posX;
@@ -47,6 +59,9 @@ typedef struct {
  * 
  * 	@var playerShip:: deltaX
  *  Member 'deltaX' is an integer value representing the change in X
+ *
+ * 	@var playerShip:: active
+ *  Member 'active' is an integer value representing if the ship is active
  */
 typedef struct {
 	UINT16 posX;

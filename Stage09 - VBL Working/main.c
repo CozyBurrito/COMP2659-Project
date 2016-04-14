@@ -1,3 +1,9 @@
+/**
+Name: Don Hagen, Mohammad Hameed
+Course: COMP 2659
+Due Date: 15/04/2016
+Instructor: ppospisil
+*/
 #include <osbind.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -53,15 +59,16 @@ exit coords 50,219
 'd' to make a selection until I get scancodes figured out
 */
 int main() {
-	/*char c;
+	char c;
 	int start = 0;
-	int selection = 0;*/
+	int selection = 0;
 	
 	
-	int exit = 0;
+	/*int exit = 0;
 	int currSelect = 0;
 	char ch;
-	
+	*/
+    
 	UINT8 *base = (UINT8 *)get_video_base();
 	
 	install_vectors();
@@ -69,46 +76,18 @@ int main() {
 	
 	splash_screen(base);
 	plot_bitmap_32(base, 50, 127, rocket_right, 32);		
-	
-	while(!exit) {
-		if(kbd_is_waiting()){
-			ch = kbd_read_char();
-			
-			if(ch == 'w' && currSelect) {
-				currSelect--;
-				clear_area(base,50,219);
-				plot_bitmap_32(base, 50, 127, rocket_right, 32);
-			}
-			else if(ch == 's' && !currSelect) {
-				currSelect++;
-				clear_area(base, 50, 127);
-				plot_bitmap_32(base, 50, 219, rocket_right, 32);
-			}
-			else if(ch == 'd' && !currSelect) {
-				play_klingon();
-				splash_screen(base);
-				plot_bitmap_32(base, 50, 127, rocket_right, 32);
-			}
-			else if(ch == 'd' && currSelect) {
-				exit = 1;
-			}
-		}
-	}
-	
-	
-	
-	
-	
-    /*
+
 	while (!((c == 'd') && (selection%2 == 1))){
 		c = kbd_read_char();
 		if((c == 's') && (selection%2 == 0)){
 			selection++;
-			
+			clear_area(base, 50, 127);
+			plot_bitmap_32(base, 50, 219, rocket_right, 32);
 		}
 		if((c == 'w') && (selection%2 == 1)){
 			selection++;
-			
+			clear_area(base,50,219);
+			plot_bitmap_32(base, 50, 127, rocket_right, 32);
 		}
 		if((c == 'd') && (selection%2 == 0)){
 			start = 1;
@@ -116,7 +95,9 @@ int main() {
 			splash_screen(base);
 			plot_bitmap_32(base, 50, 127, rocket_right, 32);
 		}
-	}*/
+	}
+    
+    /* for testing ikbd */
 	/*
 	while(ch != 0x1B) { 
 		if (kbd_is_waiting()) {

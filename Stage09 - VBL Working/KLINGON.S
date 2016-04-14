@@ -32,41 +32,41 @@ _play_klingon:
 	movem.l	d3/d4/d5/d6/a3/a4,-(a7)
 	lea	_gamePtr,a3
 	lea	_has_moved,a4
-	;line	40
+	;line	46
 	moveq	#0,d6
 	jsr	_get_video_base
 	move.l	d0,d5
 	move.l	#_buffer,d3
-	;line	40
+	;line	46
 	move.l	#256,d0
 	sub.l	d3,d0
 	and.l	#255,d0
 	add.l	d3,d0
 	move.l	d0,d3
-	;line	42
+	;line	48
 	move.l	(a3),-(a7)
 	jsr	_init_model
 	addq.l	#4,a7
-	;line	44
+	;line	50
 	pea	0
 	jsr	_time
 	addq.l	#4,a7
 	move.w	d0,-(a7)
 	jsr	_srand
 	addq.l	#2,a7
-	;line	46
+	;line	52
 	jsr	_start_sound
-	;line	48
+	;line	55
 	bra	L2
 L1:
-	;line	51
+	;line	58
 	jsr	_kbd_is_waiting
 	tst.b	d0
 	beq	L4
-	;line	52
+	;line	59
 	jsr	_kbd_read_char
 	move.b	d0,-3(a6)
-	;line	53
+	;line	60
 	clr.w	d0
 	move.b	-3(a6),d0
 	move.w	d0,-(a7)
@@ -75,39 +75,39 @@ L1:
 	jsr	_request_player_move
 	addq.l	#8,a7
 L4:
-	;line	56
+	;line	64
 	cmp.w	#70,_score_ticks
 	blt	L5
-	;line	57
+	;line	65
 	move.w	#1,-(a7)
 	move.l	(a3),-(a7)
 	jsr	_update_score
 	addq.l	#6,a7
-	;line	58
+	;line	66
 	clr.w	_score_ticks
 L5:
-	;line	61
+	;line	70
 	clr.w	-(a7)
 	move.l	(a3),-(a7)
 	jsr	_move_player_ship
 	addq.l	#6,a7
 	move.b	d0,(a4)
-	;line	62
+	;line	71
 	tst.b	(a4)
 	beq	L6
-	;line	63
+	;line	72
 	jsr	_thruster
 L6:
-	;line	66
+	;line	76
 	moveq	#0,d4
 	bra	L8
 L7:
-	;line	67
+	;line	77
 	move.w	d4,-(a7)
 	move.l	(a3),-(a7)
 	jsr	_move_enemy_ship
 	addq.l	#6,a7
-	;line	68
+	;line	78
 	clr.w	-(a7)
 	move.w	d4,-(a7)
 	move.l	(a3),-(a7)
@@ -122,19 +122,19 @@ L8:
 	bge	L7
 L11:
 L9:
-	;line	70
+	;line	80
 	cmp.w	#3,_enemy_ticks
 	blt	L12
-	;line	71
+	;line	81
 	clr.w	_enemy_ticks
 L12:
-	;line	74
+	;line	85
 	cmp.w	#1,_render_request
 	bne	L13
-	;line	75
+	;line	86
 	tst.b	d6
 	beq	L14
-	;line	76
+	;line	87
 	clr.w	d0
 	move.b	(a4),d0
 	move.w	d0,-(a7)
@@ -142,13 +142,13 @@ L12:
 	move.l	(a3),-(a7)
 	jsr	_render_model
 	lea	10(a7),a7
-	;line	77
+	;line	88
 	move.l	d5,-(a7)
 	jsr	_set_video_base
 	addq.l	#4,a7
 	bra	L15
 L14:
-	;line	80
+	;line	91
 	clr.w	d0
 	move.b	(a4),d0
 	move.w	d0,-(a7)
@@ -156,20 +156,20 @@ L14:
 	move.l	(a3),-(a7)
 	jsr	_render_model
 	lea	10(a7),a7
-	;line	81
+	;line	92
 	move.l	d3,-(a7)
 	jsr	_set_video_base
 	addq.l	#4,a7
 L15:
-	;line	84
+	;line	95
 	tst.b	d6
 	seq	d0
 	and.w	#1,d0
 	move.b	d0,d6
-	;line	85
+	;line	96
 	clr.w	_render_request
 L13:
-	;line	88
+	;line	100
 	jsr	_stop_thruster
 L2:
 	move.l	(a3),-(a7)
@@ -178,9 +178,9 @@ L2:
 	tst.b	d0
 	beq	L1
 L3:
-	;line	91
+	;line	104
 	jsr	_stop_sound
-	;line	93
+	;line	107
 	clr.w	d0
 	move.b	(a4),d0
 	move.w	d0,-(a7)
@@ -188,7 +188,7 @@ L3:
 	move.l	(a3),-(a7)
 	jsr	_render_model
 	lea	10(a7),a7
-	;line	94
+	;line	108
 	move.l	d5,-(a7)
 	jsr	_set_video_base
 	movem.l	-36(a6),d3/d4/d5/d6/a3/a4
@@ -197,7 +197,7 @@ L3:
 _install_vector:
 	link	a6,#-12
 	move.l	a3,-(a7)
-	;line	103
+	;line	118
 	move.w	8(a6),d0
 	ext.l	d0
 	asl.l	#2,d0
@@ -207,15 +207,15 @@ _install_vector:
 	jsr	__trap_1_wl
 	addq.l	#6,a7
 	move.l	d0,-12(a6)
-	;line	103
+	;line	118
 	move.l	(a3),-4(a6)
-	;line	104
+	;line	119
 	move.l	10(a6),(a3)
-	;line	106
+	;line	121
 	move.l	-12(a6),-(a7)
 	move.w	#32,-(a7)
 	jsr	__trap_1_wl
-	;line	107
+	;line	122
 	move.l	-4(a6),d0
 L16:
 	move.l	-16(a6),a3
@@ -223,9 +223,9 @@ L16:
 	rts
 _do_VBL_ISR:
 	link	a6,#0
-	;line	111
+	;line	127
 	addq.w	#1,_music_ticks
-	;line	112
+	;line	128
 	move.w	_music_ticks,d0
 	ext.l	d0
 	move.l	d0,-(a7)
@@ -233,50 +233,50 @@ _do_VBL_ISR:
 	addq.l	#4,a7
 	tst.b	d0
 	beq	L17
-	;line	113
+	;line	129
 	clr.w	_music_ticks
 L17:
-	;line	116
+	;line	132
 	addq.w	#1,_score_ticks
-	;line	118
+	;line	134
 	addq.w	#1,_enemy_ticks
-	;line	120
+	;line	136
 	move.w	#1,_render_request
 	unlk	a6
 	rts
 _do_IKBD_ISR:
 	link	a6,#-2
 	move.l	d3,-(a7)
-	;line	129
+	;line	146
 	move.l	_IKBD_RDR,a0
 	move.b	(a0),d3
-	;line	129
+	;line	146
 	tst.w	_mouse_count
 	bne	L18
-	;line	131
+	;line	148
 	cmp.b	#248,d3
 	bcc	L19
-	;line	133
+	;line	150
 	move.b	#128,d0
 	and.b	d3,d0
 	bne	L20
-	;line	134
+	;line	151
 	clr.l	d0
 	move.b	_tail,d0
 	move.l	d0,a0
 	add.l	#_IKBD_buffer,a0
 	move.b	d3,(a0)
-	;line	135
+	;line	152
 	addq.b	#1,_tail
 L20:
 	bra	L21
 L19:
-	;line	140
+	;line	157
 	move.w	#2,_mouse_count
 L21:
 	bra	L22
 L18:
-	;line	145
+	;line	162
 	subq.w	#1,_mouse_count
 L22:
 	move.l	(a7)+,d3
@@ -284,7 +284,7 @@ L22:
 	rts
 _kbd_is_waiting:
 	link	a6,#0
-	;line	152
+	;line	170
 	move.w	#11,-(a7)
 	jsr	__trap_1_w
 L23:
@@ -292,7 +292,7 @@ L23:
 	rts
 _kbd_read_char:
 	link	a6,#0
-	;line	166
+	;line	185
 	move.w	#8,-(a7)
 	jsr	__trap_1_w
 L24:
@@ -300,7 +300,7 @@ L24:
 	rts
 _install_vectors:
 	link	a6,#0
-	;line	170
+	;line	190
 	pea	_vbl_isr
 	move.w	#28,-(a7)
 	jsr	_install_vector
@@ -309,7 +309,7 @@ _install_vectors:
 	rts
 _remove_vectors:
 	link	a6,#0
-	;line	175
+	;line	196
 	move.l	_orig_vector_vbl,-(a7)
 	move.w	#28,-(a7)
 	jsr	_install_vector

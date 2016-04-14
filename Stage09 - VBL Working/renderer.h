@@ -1,3 +1,9 @@
+/**
+Name: Don Hagen, Mohammad Hameed
+Course: COMP 2659
+Due Date: 15/04/2016
+Instructor: ppospisil
+*/
 #ifndef RENDERER_H
 #define RENDERER_H
 

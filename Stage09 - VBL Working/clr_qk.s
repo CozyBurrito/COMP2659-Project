@@ -1,3 +1,12 @@
+
+;Name: Don Hagen, Mohammad Hameed
+;Course: COMP 2659
+;Due Date: 15/04/2016
+;Instructor: ppospisil
+
+
+; CREDIT TO Marc Schroeder 
+
 ; quick clear (uses movem to reduce fetch-execute cycle overhead)
 ;
 ; takes about half the number of clock cycles as the code in clear.s, and

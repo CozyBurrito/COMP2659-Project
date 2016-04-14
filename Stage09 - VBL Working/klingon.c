@@ -1,3 +1,9 @@
+/**
+Name: Don Hagen, Mohammad Hameed
+Course: COMP 2659
+Due Date: 15/04/2016
+Instructor: ppospisil
+*/
 #include <osbind.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -45,6 +51,7 @@ void play_klingon() {
 	
 	start_sound();
 	
+    /* main game loop */
 	while(!game_over(gamePtr)) {
 		
 		/* Check if there is kbd input */
@@ -53,16 +60,19 @@ void play_klingon() {
 			request_player_move(gamePtr, 0, ch);
 		}
 
+        /* check if a second has passed, if so then update the score by 1 */
 		if(score_ticks >= 70) {
 			update_score(gamePtr, 1);
 			score_ticks = 0;
 		}
 		
+        /* try to move the palyer's ship, if it moved then play a sound */
 		has_moved = move_player_ship(gamePtr, 0);
 		if(has_moved) {
 			thruster();
 		}
 		
+        /* move all the enemy's after every 3/70 of a second, and then collision with player*/
 		for(i = 0; i < NUM_ENEMIES && enemy_ticks >= 3; i++) {
 			move_enemy_ship(gamePtr, i);
 			collision(gamePtr,i,0);
@@ -71,6 +81,7 @@ void play_klingon() {
 			enemy_ticks = 0;
 		}
 		
+        /* if a render was requested (every 1/70 of a second), then render the model using double buffering */
 		if(render_request == 1) {	
 			if(switchBase) {
 				render_model(gamePtr, base, has_moved);
@@ -85,16 +96,20 @@ void play_klingon() {
 			render_request = 0;
 		}
 		
+        /* Stop the thurster sound effect (placed here so thruster effect only plays for half a second) */
 		stop_thruster();
 	}
 
+    /* stop all sound once the game is over */
 	stop_sound();
 
+    /* render a final view of the model */
 	render_model(gamePtr, base, has_moved);
 	set_video_base((UINT16*)base);
     
 }
 
+/* given a vector num and the function, install it and return the old vector */
 Vector install_vector(int num, Vector vector) {
 	Vector orig;
 	Vector *vectp = (Vector *)((long)num << 2);
@@ -107,6 +122,7 @@ Vector install_vector(int num, Vector vector) {
 	return orig;
 }
 
+/* the C part of the VBL_ISR, just updates the global variables, and tries to play the next note when it can */
 void do_VBL_ISR() {
 	music_ticks++;
 	if (update_music(music_ticks)){
@@ -120,6 +136,7 @@ void do_VBL_ISR() {
 	render_request = 1;
 }
 
+/* The C part of the IKBD_ISR, currently does not work for some reason unbeknownst to me */
 void do_IKBD_ISR() {
 	/* Turn off MIDI */
 	/* Check if IKBD is asserting IRQ */
@@ -147,11 +164,13 @@ void do_IKBD_ISR() {
 	
 }
 
+/* checks if the buffer has something in it */
 UINT8 kbd_is_waiting() {
 	/*return head != tail;*/
     return Cconis();
 }
 
+/* reads a char from the buffer */
 UINT8 kbd_read_char() {
     /*UINT8 ret = 0;
 	
@@ -166,11 +185,13 @@ UINT8 kbd_read_char() {
     return Cnecin();
 }
 
+/* high level function to install multiple vectors*/
 void install_vectors() {
 	orig_vector_vbl = install_vector(VBL, vbl_isr);
 	/*orig_vector_ikbd = install_vector(IKBD, ikbd_isr);*/
 }
 
+/* high level function to remove multiple vectors*/
 void remove_vectors() {
 	install_vector(VBL, orig_vector_vbl);
 	/*install_vector(IKBD, orig_vector_ikbd);*/
