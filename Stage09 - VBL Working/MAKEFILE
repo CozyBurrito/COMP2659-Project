@@ -10,8 +10,8 @@ clean:
 rmObj:
 	!Rm *.o
 	
-klingon: main.o klingon.o renderer.o model.o events.o raster.o PSG.o music.o effects.o bitmaps.o clr_qk.o sys.o 
-	cc68x main.o klingon.o renderer.o model.o events.o raster.o PSG.o music.o effects.o bitmaps.o clr_qk.o sys.o -o klingon
+klingon: main.o klingon.o renderer.o model.o events.o raster.o PSG.o music.o effects.o bitmaps.o clr_qk.o sys.o
+	cc68x -g main.o klingon.o renderer.o model.o events.o raster.o PSG.o music.o effects.o bitmaps.o clr_qk.o sys.o -o klingon
 
 main.o: main.c
 	cc68x -g -c main.c

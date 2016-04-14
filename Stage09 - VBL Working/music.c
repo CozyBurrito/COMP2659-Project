@@ -1,3 +1,4 @@
+#include <osbind.h>
 #include "music.h"
 
 static int j = 0;
@@ -19,9 +20,13 @@ UINT16 timeArray[] = {54,54,56,56,56,
 					  };
 					  
 void start_sound(){
+	long old_ssp = Super(0);
+	
 	set_tone(0, C_5);
 	enable_channel(0, 1, 0);
 	set_volume(0, 11);
+	
+	Super(old_ssp);
 }
 
 UINT8 update_music(UINT32 time_elapsed){

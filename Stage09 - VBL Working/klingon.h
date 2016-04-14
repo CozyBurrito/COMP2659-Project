@@ -10,10 +10,19 @@
 #include "sys.h"
 
 #define VBL 28
+#define IKBD 70
 
-
-void play_klingon();
 typedef void (*Vector)();
 Vector install_vector(int num, Vector vector);
+
+void do_VBL_ISR();
+void do_IKBD_ISR();
+
+void play_klingon();
+void install_vectors();
+void remove_vectors();
+
+UINT8 kbd_is_waiting();
+UINT8 kbd_read_char();
 
 #endif

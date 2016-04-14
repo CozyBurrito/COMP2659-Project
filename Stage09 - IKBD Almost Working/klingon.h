@@ -22,7 +22,7 @@ void play_klingon();
 void install_vectors();
 void remove_vectors();
 
-long kbd_is_waiting();
-char kbd_read_char();
+UINT8 kbd_is_waiting();
+UINT8 kbd_read_char();
 
 #endif

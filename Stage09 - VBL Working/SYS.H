@@ -7,5 +7,7 @@ UINT16* get_video_base();
 void set_video_base(UINT16 *base);
 
 void vbl_isr();
+void ikbd_isr();
+int set_ipl(int mask);
 
 #endif

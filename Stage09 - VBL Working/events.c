@@ -130,11 +130,3 @@ UINT8 game_over(struct Model *modelPtr) {
 	return get_player_alive(modelPtr, 0);
 }
 
-
-long kbd_is_waiting() {
-	return Cconis();
-}
-
-long kbd_read_char() {
-	return Cnecin();
-}

@@ -71,7 +71,9 @@ void enable_channel(int channel, int tone_on, int noise_on) {
 }
 
 void stop_sound() {
+	long old_ssp = Super(0);
 	write_psg(8, 0);
 	write_psg(9, 0);
 	write_psg(10, 0);
+	Super(old_ssp);
 }
