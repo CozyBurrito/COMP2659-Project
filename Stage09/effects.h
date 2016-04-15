@@ -7,7 +7,7 @@ Instructor: ppospisil
 #ifndef EFFECTS_H
 #define EFFECTS_H
 
-void thruster();
+void start_thruster();
 void stop_thruster();
 void explosion();
 

@@ -25,10 +25,19 @@ UINT16 timeArray[] = {54,54,56,56,56,
 					  };
 /*
 sets up sound registers IOT begin playing sounds*/
-void start_sound(){
+void start_music(){
+	long old_ssp = Super(0);
 	set_tone(0, C_5);
 	enable_channel(0, 1, 0);
 	set_volume(0, 11);
+	Super(old_ssp);
+}
+
+void stop_music(){
+	long old_ssp = Super(0);
+	stop_sound();
+	Super(old_ssp);
+
 }
 
 /*Given a time, the function determines if it's time to play the

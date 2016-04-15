@@ -122,3 +122,40 @@ void plot_bitmap_64_byte(UINT8 *base, int x, int y, const UINT8 *bitmap, unsigne
 	}
 
 }
+
+/*Don's plot bitmap, won't work with the bitmaps we shuffled up (ships)*/
+void plot_screen(UINT8 *base, int x, int y, const UINT8 *bitmap, unsigned int height) {
+   int i = 0,
+      k = 0;
+
+      for (i = 0; i < height; i++){
+         for (k =0; k < 80; k++){
+            *(base + ((y+i) * 80) + ((x >> 3) + k)) |= bitmap[(80*i)+(80-k)];
+         }
+      }
+   }
+   
+/*Don's plot bitmap used to make the title screen selector move*/
+/*This should be made into a neater function that can be passed a bitmap and values*/
+void plot_bitmap_32(UINT8 *base, int x, int y, const UINT8 *bitmap, unsigned int height) {
+   int i = 0,
+      k = 0;
+
+      for (i = 0; i < height; i++){
+         for (k =0; k < 4; k++){
+            *(base + ((y+i) * 80) + ((x >> 3) + k)) |= bitmap[(4*i)+(3-k)];
+         }
+      }
+   }
+
+/*these plot functions could be combined, no time. They work.*/
+void clear_area(UINT8 *base, int x, int y){
+	int i = 0,
+    k = 0;
+
+    for (i = 0; i < 32; i++){
+        for (k =0; k < 4; k++){
+           *(base + ((y+i) * 80) + ((x >> 3) + k)) &= rocket_empty[(4*i)+(3-k)];
+        }
+    }
+}

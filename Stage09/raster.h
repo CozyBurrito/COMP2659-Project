@@ -20,4 +20,8 @@ void print_clr_num(UINT8 *base, int x, int y);
 void clear_screen(long *base);
 void plot_bitmap_64_byte(UINT8 *base, int x, int y, const UINT8 *bitmap, unsigned int height);
 
+void plot_screen(UINT8 *base, int x, int y, const UINT8 *bitmap, unsigned int height);
+void plot_bitmap_32(UINT8 *base, int x, int y, const UINT8 *bitmap, unsigned int height);
+void clear_area(UINT8 *base, int x, int y);
+
 #endif

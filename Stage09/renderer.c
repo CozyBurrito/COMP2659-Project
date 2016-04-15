@@ -67,3 +67,9 @@ void render_score(struct Model *modelPtr, UINT8 *base) {
 	print_num(base, 590, 370, score);
 	
 }
+
+/*function to draw the menu to the screen*/
+void splash_screen(UINT8 * base){
+		clear_screen((long *) base);
+		plot_screen(base, 0, 0, splash, 400);	
+}

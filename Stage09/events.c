@@ -127,3 +127,22 @@ returns a value if the player hasn't collided with an enemy
 UINT8 game_over(struct Model *modelPtr) {
 	return get_player_alive(modelPtr, 0);
 }
+
+unsigned char get_input(){
+	unsigned char key;
+	long old_ssp = Super(0);
+	*IE &= 0xBF;
+	Super(old_ssp);
+	
+	key = buffer[head++];
+	
+	old_ssp = Super(0);
+	*IE |= 0x40;
+	Super(old_ssp);
+	return key;
+}
+
+bool buffer_full(){
+	return head!=tail;
+}
+
