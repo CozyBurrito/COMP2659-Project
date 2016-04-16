@@ -4,6 +4,7 @@ Course: COMP 2659
 Due Date: 15/04/2016
 Instructor: ppospisil
 */
+
 #ifndef BITMAPS_H
 #define BITMAPS_H
 

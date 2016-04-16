@@ -4,6 +4,7 @@ Course: COMP 2659
 Due Date: 15/04/2016
 Instructor: ppospisil
 */
+
 #include "globals.h"
 
 const UINT8 p1_ship[] = 

@@ -4,21 +4,18 @@ Course: COMP 2659
 Due Date: 15/04/2016
 Instructor: ppospisil
 */
+
 #ifndef KLINGON_H
 #define KLINGON_H
 
-#include "model.h"
 #include "events.h"
-#include "renderer.h"
-#include "globals.h"
-#include "music.h"
 #include "effects.h"
 #include "sys.h"
+#include "renderer.h"
+#include "globals.h"
 
-#define VBL 28
 
-void play_klingon();
-typedef void (*Vector)();
-Vector install_vector(int num, Vector vector);
+void play_klingon(UINT8 *base);
+
 
 #endif

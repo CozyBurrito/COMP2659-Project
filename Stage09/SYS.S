@@ -1,27 +1,12 @@
-;Name: Don Hagen, Mohammad Hameed
-;Course: COMP 2659
-;Due Date: 15/04/2016
-;Instructor: ppospisil
+;   Name: Don Hagen, Mohammad Hameed
+;   Course: COMP 2659
+;   Due Date: 15/04/2016
+;   Instructor: ppospisil
 
 	xdef	_get_video_base
 	xdef	_set_video_base
-	xdef	_vbl_isr
-	
-	xref	_do_VBL_ISR
-	xdef 	_kbd_isr
-	xref 	_do_kbd_isr
 
 ADDR_OFFSET	equ	8
-
-;save registers,
-;jump to the kbd isr routine
-;restore registers
-;return when done
-_kbd_isr:
-	movem.l d0-2/a0-2,-(sp)
-	jsr _do_kbd_isr
-	movem.l (sp)+,d0-2/a0-2
-	rte
 
 ;enter supervisor mode
 ;needed to access protected memory
@@ -88,19 +73,6 @@ _set_video_base:
 	movem.l	(sp)+,d0-2/a0-2
 	unlk a6
 	rts
-	
-;call to vbl subroutine
-_vbl_isr:
-	movem.l	d0-2/a0-2,-(sp)
-	jsr	_do_VBL_ISR
-	movem.l	(sp)+,d0-2/a0-2
-	rte
-	
-	
-	
-	
-	
-	
 	
 	
 old_ssp:	ds.l	1

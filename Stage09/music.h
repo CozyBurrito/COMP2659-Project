@@ -11,8 +11,9 @@ Instructor: ppospisil
 #include "globals.h"
 
 void start_music();
-UINT8 update_music(UINT32 time_elapsed); 
-
 void stop_music();
+
+bool update_music(UINT32 time_elapsed); 
+
 
 #endif

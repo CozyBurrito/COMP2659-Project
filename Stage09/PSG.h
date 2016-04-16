@@ -6,6 +6,7 @@ Instructor: ppospisil
 */
 #ifndef PSG_H
 #define PSG_H
+
 #include "globals.h"
 
 #define C_1 0x0D5D

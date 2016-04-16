@@ -7,7 +7,6 @@ Instructor: ppospisil
 #include <osbind.h>
 
 #include "PSG.h"
-#include "globals.h"
 
 
 void write_psg(int reg, UINT8 val) {

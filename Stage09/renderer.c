@@ -4,27 +4,25 @@ Course: COMP 2659
 Due Date: 15/04/2016
 Instructor: ppospisil
 */
+
 #include <osbind.h>
 
 #include "renderer.h"
 
 
-void init_render(UINT8 *base) {
-}
-
 /*draws all elements of the current model to the screen*/
 void render_model(struct Model *modelPtr, UINT8 *base, UINT8 has_moved) {
 	int i = 0;
-	
 	long *base2 = (long *)base;
+
 	clear_screen(base2);
+
 	render_line(base);
 
 	render_ship(modelPtr, base, 1, 0);
 
 	for(i = 0; i <= NUM_ENEMIES; i++){
 		render_ship(modelPtr, base, 0, i);
-
 	}
 	
 	render_score(modelPtr, base);
@@ -69,7 +67,18 @@ void render_score(struct Model *modelPtr, UINT8 *base) {
 }
 
 /*function to draw the menu to the screen*/
-void splash_screen(UINT8 * base){
-		clear_screen((long *) base);
-		plot_screen(base, 0, 0, splash, 400);	
+void render_splash_screen(UINT8 *base){
+	clear_screen((long *) base);
+	plot_screen(base, 0, 0, splash, 400);	
+}
+
+void render_rocket(UINT8 *base, UINT8 location) {
+    if(location) {
+        clear_area(base, 50, 127);
+        plot_bitmap_32(base, 50, 219, rocket_right, 32);
+    }
+    else {
+		clear_area(base,50,219);
+        plot_bitmap_32(base, 50, 127, rocket_right, 32);
+    }
 }

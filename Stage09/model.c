@@ -4,14 +4,12 @@ Course: COMP 2659
 Due Date: 15/04/2016
 Instructor: ppospisil
 */
+
 #include <osbind.h>
 #include <stdlib.h>
 #include <stdio.h>
 
 #include "model.h"
-#include "events.h"
-#include "renderer.h"
-#include "globals.h"
 
 /** init_model: Used to initialize the values of a given model.  
  * 				It takes a pointer to a model and changes it's values 
