@@ -150,7 +150,7 @@ void plot_bitmap_32(UINT8 *base, int x, int y, const UINT8 *bitmap, unsigned int
    }
 
 /*these plot functions could be combined, no time. They work.*/
-void clear_area(UINT8 *base, int x, int y){
+void clear_area(UINT8 *base, int x, int y) {
 	int i = 0,
     k = 0;
 
@@ -160,3 +160,41 @@ void clear_area(UINT8 *base, int x, int y){
         }
     }
 }
+
+void save_mouse_bkgd(UINT16 *base, int x, int y) {
+	int i, j;
+	
+	for(i = 0, j = 0; i < MOUSE_HEIGHT; i++) {
+		mouse_bkgd[j] = *(base + (y + i) * 40 + (x >> 4)) >> (x & 15);
+		mouse_bkgd[j++] = *(base + (y + i) * 40 + ((x >> 4) + 1)) << (15 - (x & 15));
+	}
+}
+
+void restore_mouse_bkgd(UINT16 *base, int x, int y) {
+	int i, j;
+	
+	for(i = 0, j = 0; i < MOUSE_HEIGHT; i++) {
+		*(base + (y + i) * 40 + (x >> 4)) = mouse_bkgd[j];
+		*(base + (y + i) * 40 + ((x >> 4) + 1)) = mouse_bkgd[j++];
+	}
+}
+
+void plot_mouse(UINT16 *base, int x, int y, UINT16 *bitmap) {
+	int i, j;
+	
+	for(i = 0, j = 0; i < MOUSE_HEIGHT; i++) {
+		*(base + (y + i) * 40 + (x >> 4)) ^= *(bitmap + j) >> (x & 15);
+		*(base + (y + i) * 40 + ((x >> 4) + 1)) ^= *(bitmap + j++) << (16 - (x & 15));
+	}
+}
+
+
+
+
+
+
+
+
+
+
+

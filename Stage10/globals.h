@@ -39,6 +39,9 @@ typedef enum { false, true } bool;
 #define SHIP_WIDTH 64
 #define SHIP_HEIGHT 32
 
+#define MOUSE_WIDTH 16
+#define MOUSE_HEIGHT 19
+
 
 #define NUM_PLAYERS 1
 #define NUM_ENEMIES 6
