@@ -22,6 +22,12 @@ int score_ticks = 0;
 int enemy_ticks = 0;
 int render_request = 1; 
 
+unsigned char mse_button = 0xF8;
+unsigned char mse_deltaX = 0x00;
+unsigned char mse_deltaY = 0x00;
+
+int mse_state = 0;
+
 volatile   		unsigned char *const CTRL       = 0xFFFC00;
 volatile const 	unsigned char *const STATUS		= 0xFFFC00;
 volatile const 	unsigned char *const READER		= 0xFFFC02;
@@ -43,10 +49,28 @@ void do_VBL_ISR() {
 }
 
 void do_IKBD_ISR(){
-  UINT8 code = *(READER);
-  if((code & 0x80 ) != 0x80){ 
-	IKBD_buffer[tail++] = code;
-  }  
+	UINT8 code = *(READER);
+	
+	if(!mse_state) {
+		if((code & 0x80 ) != 0x80){ 
+			IKBD_buffer[tail++] = code;
+		}
+		else if (code >= 0xF8){
+			mse_button = code;
+			mse_state--;
+		}
+	}
+	else {
+		if(mse_state < 0) {
+			mse_deltaX = code;
+			mse_state = 1;
+		}
+		else {
+			mse_deltaY = code;
+			mse_state--;
+		}
+	}
+		
   *MFP &= 0xBF;
 }
 

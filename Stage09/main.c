@@ -16,7 +16,7 @@ int main() {
 	UINT8 *base = (UINT8 *)get_video_base();
 
     install_vectors();
-
+	
     render_splash_screen(base);
     render_rocket(base, 0);
     
