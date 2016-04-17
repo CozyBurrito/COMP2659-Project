@@ -32,12 +32,12 @@ int main() {
         
 		update_mouse(base);
 		
-        /* Read a character from the keyboard if a key is pressed */
+         /* Read a character from the keyboard if a key is pressed  */
 		if(kbd_is_waiting()) {
 			input = kbd_read_char() >> 16;
 		}
         
-        /* Either change selection, play the game, or quit the game */
+         /* Either change selection, play the game, or quit the game  */
         if((input == KBD_W || mouse_inBounds() == 1) && selection)  {
 			input = 0;
 			selection = 0;
@@ -62,9 +62,9 @@ int main() {
 			init_mouse(base);
 			
         }
-        else if ((input == KBD_ESC || input == KBD_D || mse_click == 2) && selection) {
+        /* else if ((input == KBD_ESC || input == KBD_D || mse_click == 2) && selection) {
             exit = true;
-        }
+        }*/
         
 	}
 	
@@ -73,7 +73,7 @@ int main() {
 	clear_screen((long *)(UINT8 *)base);
 	
     remove_vectors();	
-
+	
 	return 0;		
 }
 

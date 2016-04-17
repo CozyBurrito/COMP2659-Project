@@ -1,0 +1,67 @@
+all: 
+	make clean 
+	make os.prg
+	burnroms
+	make rmObj
+
+clean:
+	!Rm *.o
+	!Rm os.prg
+
+rmObj:
+	!Rm *.o
+	
+os.prg: start.o init.o main.o klingon.o renderer.o model.o events.o raster.o PSG.o music.o effects.o clr_qk.o sys.o bitmaps.o isr.o isrs.o
+	ld start.o init.o main.o klingon.o renderer.o model.o events.o raster.o PSG.o music.o effects.o clr_qk.o sys.o bitmaps.o isr.o isrs.o crt0.o libc.a -o os.prg
+
+main.o: main.c
+	cc68x -g -c main.c
+	
+klingon.o: klingon.c klingon.h
+	cc68x -g -c klingon.c
+
+renderer.o: renderer.c renderer.h 
+	cc68x -g -c renderer.c
+	
+model.o: model.c model.h 
+	cc68x -g -c model.c
+	
+events.o: events.c events.h 
+	cc68x -g -c events.c
+		
+raster.o: raster.c raster.h 
+	cc68x -g -c raster.c
+			
+PSG.o: PSG.c PSG.h 
+	cc68x -g -c PSG.c
+
+music.o: music.c music.h 
+	cc68x -g -c music.c
+
+effects.o: effects.c effects.h
+	cc68x -g -c effects.c
+
+bitmaps.o: bitmaps.c bitmaps.h 
+	cc68x -g -c bitmaps.c 
+	
+clr_qk.o: clr_qk.s clr_qk.h
+	gen -L2 -D clr_qk.s
+	
+sys.o: sys.s sys.h
+	gen -L2 -D sys.s
+	
+isr.o: isr.s isr.h
+	gen -L2 -D isr.s
+
+isrs.o: isrs.c isrs.h
+	cc68x -g -c isrs.c 
+	
+start.o: start.s
+	gen -L2 start.s
+
+init.o: init.c
+	cc68x -c init.c
+
+
+	
+
