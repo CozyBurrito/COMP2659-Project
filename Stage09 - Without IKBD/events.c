@@ -158,28 +158,25 @@ UINT8 game_over(struct Model *modelPtr) {
 
 /* 
 Purpose: Reads a value from buffer
-Param: update_head: if need to update head for key repeats
 Return: Long with scancode and ascii value
         Hi Word = Scancode
         Low Word = Ascii value
 */
-long kbd_read_char(bool update_head) {
-	long ret;
+long kbd_read_char() {
+	/* long ret;
     
 	mask_interrupts();
 	
-    /* read the scancode from buffer, and then put ascii value */
+     read the scancode from buffer, and then put ascii value 
 	ret = IKBD_buffer[head];
 	ret = ret << 16;
-	ret = ret + *(ascii_tbl + IKBD_buffer[head]);
+	ret = ret + *(ascii_tbl + IKBD_buffer[head++]);
 	
 	unmask_interrupts();
     
-	if(update_head) {
-		head++;
-	}
-	
-	return ret;
+	return ret; */
+    
+    return Cnecin();
 }
 
 
@@ -188,8 +185,9 @@ Purpose: Checks to see if buffer is empty
 Return: true = not empty
         false = empty
 */
-bool kbd_is_waiting() {
-	return head != tail;
+long kbd_is_waiting() {
+	/* return head != tail; */
+    return Cconis();
 }
 
 

@@ -21,8 +21,8 @@ void collision(struct Model *modelPtr, UINT16 enemy, UINT16 player);
 
 UINT8 game_over(struct Model *modelPtr);
 
-long kbd_read_char(bool update_head);
-bool kbd_is_waiting();
+long kbd_read_char();
+long kbd_is_waiting();
 void clear_kbd_buffer();
 
 #endif

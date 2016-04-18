@@ -41,15 +41,9 @@ void play_klingon(UINT8 *base) {
     /* Main game loop, keep playing the game until the player dies */
 	while(!game_over(gamePtr)) {
 
-        /* Check if there as a keypress, if so, then check if it's a valid key and request model to be updated 
-		   if there is a key being held, then repeat that last thing in the buffer */
-        if(key_repeat && key_update_ticks >= 3) {
-			input = kbd_read_char(0) >> 16;
-            request_player_move(gamePtr, 0, input);
-			key_update_ticks = 0;
-		}
-		else if(kbd_is_waiting() && !key_repeat){
-            input = kbd_read_char(1) >> 16;
+        /* Check if there as a keypress, if so, then check if it's a valid key and request model to be updated */
+        if(kbd_is_waiting()){
+            input = kbd_read_char() >> 16;
             request_player_move(gamePtr, 0, input);
         }
         
@@ -90,7 +84,6 @@ void play_klingon(UINT8 *base) {
         
         /* Stop the sound of the thruster, placed here since timing is good */
 		stop_thruster();
-	
 	}
     
     /* Once the game is over, stop the music and play an explosion sound */

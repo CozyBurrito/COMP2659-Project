@@ -30,15 +30,12 @@ extern UINT8 IKBD_buffer[256];
 extern int music_ticks;
 extern int score_ticks;
 extern int enemy_ticks;
-extern int key_update_ticks;
 extern int render_request; 
 
 extern int mseX;
 extern int mseY;
 extern int mse_click;
 extern int mse_enable;
-
-extern bool key_repeat;
 
 void do_VBL_ISR();
 void do_IKBD_ISR();

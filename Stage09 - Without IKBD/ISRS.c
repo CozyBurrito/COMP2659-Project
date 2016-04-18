@@ -20,7 +20,6 @@ UINT8 IKBD_buffer[256];
 int music_ticks = 0;
 int score_ticks = 0;
 int enemy_ticks = 0;
-int key_update_ticks = 0;
 int render_request = 1; 
 
 unsigned char mse_button = 0xF8;
@@ -40,8 +39,6 @@ int old_mseY;
 int mse_click;
 int mse_enable;
 
-bool key_repeat = false;
-
 volatile   		unsigned char *const CTRL       = 0xFFFC00;
 volatile const 	unsigned char *const STATUS		= 0xFFFC00;
 volatile const 	unsigned char *const READER		= 0xFFFC02;
@@ -59,8 +56,6 @@ void do_VBL_ISR() {
 	}
 
 	score_ticks++;
-	
-	key_update_ticks++;
 
 	enemy_ticks++;
 		
@@ -85,10 +80,6 @@ void do_IKBD_ISR(){
 		}
 		else if((code & 0x80 ) == 0x00){    /* If it's a make code add it to the buffer */
 			IKBD_buffer[tail++] = code;
-			key_repeat = true;
-		}
-		else if((code & 0x80 ) == 0x80){    /* If it's a break code set key repeats off */
-			key_repeat = false;
 		}
 		
 	}
@@ -187,7 +178,7 @@ void install_vectors() {
     mask_interrupts();
 
 	VBL_orig_vector = install_vector(VBL_ISR, vbl_isr);
-    IKBD_orig_vector = install_vector(IKBD_ISR, ikbd_isr);
+    /* IKBD_orig_vector = install_vector(IKBD_ISR, ikbd_isr); */
 	
 	unmask_interrupts();
 }
@@ -199,7 +190,7 @@ void remove_vectors() {
     mask_interrupts();
 
 	install_vector(VBL_ISR, VBL_orig_vector);
-    install_vector(IKBD_ISR, IKBD_orig_vector);
+    /* install_vector(IKBD_ISR, IKBD_orig_vector); */
 	
 	unmask_interrupts();
 }

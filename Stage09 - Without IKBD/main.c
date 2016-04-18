@@ -25,11 +25,11 @@ int main() {
 
     install_vectors();
 	
-	mse_enable = 1;     /* enable the mouse to be rendered */
+	mse_enable = 0;     /* enable the mouse to be rendered */
 	
 	clear_screen((long *)base);
 	
-	init_mouse(base);   /* initialize the starting X and Y of mouse, and save background, then plot mouse */
+	/* init_mouse(base); */   /* initialize the starting X and Y of mouse, and save background, then plot mouse */
 	
     
     /* render the splash screen to main base */
@@ -41,11 +41,11 @@ int main() {
 	while(!exit) {
         
         
-		update_mouse(base); /* update the mouse, then try to render it (renders every ~1/70th second)*/
+		/* update_mouse(base);*/ /* update the mouse, then try to render it (renders every ~1/70th second)*/ 
 		
         /* Read a character from the keyboard if a key is pressed */
 		if(kbd_is_waiting()) {
-			input = kbd_read_char(1) >> 16;
+			input = kbd_read_char() >> 16;
 		}
         
         /* Either change selection, play the game, or quit the game */
@@ -66,12 +66,12 @@ int main() {
 			
 			play_klingon((UINT8 *)base);    /* Start the game */
 
-			mse_enable = 1;
+			mse_enable = 0;
 			
             /* render the splash screen again, and reset the mouse */
             render_splash_screen((UINT8 *)base);
 			render_rocket((UINT8 *)base, 0);
-			init_mouse(base);
+			/* init_mouse(base); */
 			
         }
         else if ((input == KBD_ESC || input == KBD_D || mse_click == 2) && selection) {
